@@ -24,8 +24,8 @@ public class ResetHopper extends SequentialCommandGroup {
     // super(new FooCommand(), new BarCommand());
     super(
       new SetHopperIdleMode(),
-          new SetIntakeSpeed(0)
-          // new ActuateIntake(false)
+          new SetIntakeSpeed(0),
+          new ActuateIntake(false)
           );
   }
 }

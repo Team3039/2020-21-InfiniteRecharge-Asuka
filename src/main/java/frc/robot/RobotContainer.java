@@ -1,150 +1,58 @@
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj2.command.button.Button;
-import frc.robot.commands.ActuateIntake;
-import frc.robot.commands.DeployWinches;
-import frc.robot.commands.RetractClimbArms;
-import frc.robot.commands.SetClimbArmSpeed;
-import frc.robot.commands.SetHood;
-import frc.robot.commands.SetHoodPositionCalculatedOutput;
-import frc.robot.commands.SetHopperIdleMode;
-import frc.robot.commands.SetHopperUnjamMode;
-import frc.robot.commands.SetIntakeSpeed;
-import frc.robot.commands.SetShooterSpeed;
-import frc.robot.commands.SetTurretClimbMode;
-import frc.robot.commands.SetTurretTrackMode;
-import frc.robot.commands.ShiftServo;
-import frc.robot.commands.sequences.ClimbDeploy;
-import frc.robot.commands.sequences.FeedCells;
-import frc.robot.commands.sequences.IndexCells;
-import frc.robot.commands.sequences.IntakeCells;
-import frc.robot.commands.sequences.ResetHopper;
-import frc.robot.commands.sequences.ResetShooter;
-import frc.robot.commands.sequences.ShootFarShot;
-import frc.robot.commands.sequences.ShootMidShot;
-import frc.robot.commands.sequences.ShootNearShot;
+import edu.wpi.first.hal.simulation.DriverStationDataJNI;
+import edu.wpi.first.wpilibj.GenericHID;
+import frc.robot.commands.ExampleCommand;
 import frc.robot.controllers.PS4Gamepad;
-import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drive;
-import frc.robot.subsystems.Hopper;
-import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.Turret;
+import frc.robot.subsystems.ExampleSubsystem;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.Button;
 
+/**
+ * This class is where the bulk of the robot should be declared. Since Command-based is a
+ * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
+ * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
+ * subsystems, commands, and button mappings) should be declared here.
+ */
 public class RobotContainer {
 
-  public final static Drive drive = Drive.getInstance();
-  public final static Intake intake = new Intake();
-  public final static Turret turret = new Turret();
-  public final static Hopper hopper = new Hopper();
-  public final static Shooter shooter = new Shooter();
-  public final static Climber climber = new Climber();
+  public static Drive driveSubsystem = new Drive();
 
-  public static PS4Gamepad driverPad = new PS4Gamepad(RobotMap.DRIVER_JOYSTICK_1_USB_ID);
-  public static PS4Gamepad operatorPad = new PS4Gamepad(RobotMap.OPERATOR_JOYSTICK_1_USB_ID);
+  // The robot's subsystems and commands are defined here...
+  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
-  public static Timer timer = new Timer();
+  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
-  // Declare Button Objects here
-  // Driver Buttons
-  Button driverTriangle = driverPad.getButtonTriangle();
-  Button driverSquare = driverPad.getButtonSquare();
-  Button driverCircle = driverPad.getButtonCircle();
-  Button driverX = driverPad.getButtonX();
-  Button driverShare = driverPad.getShareButton();
-  Button driverOptions = driverPad.getOptionsButton();
-  Button driverPadButton = driverPad.getButtonPad();
-  Button driverL1 = driverPad.getL1();
-  Button driverL2 = driverPad.getL2();
-  Button driverL3 = driverPad.getL3();
-  Button driverR1 = driverPad.getR1();
-  Button driverR3 = driverPad.getR3();
-  Button startButton = driverPad.getStartButton();
-  Button driverDPadUp = driverPad.getDPadUp();
-  Button driverDPadDown = driverPad.getDPadDown();
+  public static PS4Gamepad driverPad = new PS4Gamepad(0);
 
-  // Operator Buttons
-  Button operatorTriangle = operatorPad.getButtonTriangle();
-  Button operatorSquare = operatorPad.getButtonSquare();
-  Button operatorCircle = operatorPad.getButtonCircle();
-  Button operatorX = operatorPad.getButtonX();
-  Button operatorShare = operatorPad.getShareButton();
-  Button operatorOptions = operatorPad.getOptionsButton();
-  Button operatorPadButton = operatorPad.getButtonPad();
-  Button operatorL1 = operatorPad.getL1();
-  Button operatorL2 = operatorPad.getL2();
-  Button operatorR1 = operatorPad.getR1();
-  Button operatorR2 = operatorPad.getR2();
-
+  /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    // Configure the button bindings
     configureButtonBindings();
   }
 
-  // Put Button Bindings Here
-  private void configureButtonBindings() {
-    
-    //Driver
-    // driverL1.whileHeld(new DeployWinches());
-    // driverR1.whileHeld(new IntakeCells());
-    // driverR1.whenReleased(new IndexCells());
-    // driverOptions.whileHeld(new RetractClimbArms(.50));
-    // driverOptions.whenReleased(new RetractClimbArms(0));
-    // driverX.whileHeld(new SetHood(0.4));
-    // driverPadButton.whileHeld(new SetHood(1));
-    // driverTriangle.whenPressed(new SetTurretClimbMode());
-    // driverShare.whenPressed(new ClimbDeploy());
-    // startButton.whileHeld(new SetClimbArmSpeed(.4));
-    // startButton.whenReleased(new SetClimbArmSpeed(0));
-    driverL1.whileHeld(new IntakeCells());
-    driverL1.whenReleased(new ResetHopper());
-    driverTriangle.whenPressed(new ShootNearShot());
-    driverSquare.whenPressed(new ShootMidShot());
-    driverX.whenPressed(new ShootFarShot());
-    driverR1.whileHeld(new FeedCells());
-    driverCircle.whenPressed(new SetHood(1));
-    // When the feed command ends, the systems are all reset
-    driverR1.whenReleased(new ResetHopper());
-    driverR1.whenReleased(new ResetShooter());
-    driverOptions.whileHeld(new SetTurretTrackMode());
-    driverDPadUp.whenPressed(new ActuateIntake(true));
-    driverDPadDown.whenPressed(new ActuateIntake(false));
-    driverL2.whileHeld(new SetIntakeSpeed(-.99));
-    driverL2.whenReleased(new SetIntakeSpeed(0));
+  /**
+   * Use this method to define your button->command mappings. Buttons can be created by
+   * instantiating a {@link GenericHID} or one of its subclasses ({@link
+   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
+   * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
+   */
+Button driverCircle = driverPad.getButtonCircle();
 
-    //Operator
-    //When X is pressed it turns on the shooter to a set RPM (5800) raises the hood and starts tracking
-    operatorX.whenPressed(new ShootFarShot());
-    //When Circle is pressed it turns on the shooter to a set RPM (5250) raises the hood and starts tracking
-    operatorCircle.whenPressed(new ShootMidShot());
-    //When Triangle is pressed it turns on the shooter to a set RPM(4800) raises the hood and starts tracking
-    operatorTriangle.whenPressed(new ShootNearShot());
-    //When Right Bumper is held the intake comes down and the intaking sequence runs 
-    // operatorR1.whileHeld(new IntakeCells());
-    // operatorR1.whenReleased(new IndexCells());
-    //When Right Trigger is held the feeding sequence runs 
-    operatorR2.whileHeld(new FeedCells());
-    // When the feed command ends, the systems are all reset
-    operatorR2.whenReleased(new ResetHopper());
-    operatorR2.whenReleased(new ResetShooter());
+  private void configureButtonBindings() {}
 
-    operatorL1.whileHeld(new SetIntakeSpeed(.6));
-    operatorL1.whileHeld(new SetShooterSpeed(-.8));
-    operatorL1.whileHeld(new SetHopperUnjamMode());
-    operatorL1.whenReleased(new SetIntakeSpeed(0));
-    operatorL1.whenReleased(new SetHopperIdleMode());
-    operatorL1.whenReleased(new SetShooterSpeed(0));
-
-    operatorL2.whenPressed(new ResetHopper());
-    operatorL2.whenPressed(new ResetShooter()); 
-  }
-
-  //Get Controller Objects
-  public static PS4Gamepad getDriver() {
-    return driverPad;
-  }
-
-  public static PS4Gamepad getOperator() {
-    return operatorPad;
+  /**
+   * Use this to pass the autonomous command to the main {@link Robot} class.
+   *
+   * @return the command to run in autonomous
+   */
+  public Command getAutonomousCommand() {
+    // An ExampleCommand will run in autonomous
+    return m_autoCommand;
   }
 }
