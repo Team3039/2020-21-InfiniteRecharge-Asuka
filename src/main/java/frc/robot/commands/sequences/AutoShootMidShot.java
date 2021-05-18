@@ -9,7 +9,6 @@ package frc.robot.commands.sequences;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
-import frc.robot.commands.ActuateHood;
 import frc.robot.commands.SetIsFar;
 import frc.robot.commands.SetShooterSpeedRPM;
 import frc.robot.commands.SetTurretTrackMode;
@@ -26,7 +25,6 @@ public class AutoShootMidShot extends SequentialCommandGroup {
     // super(new FooCommand(), new BarCommand());
     super(
           new SetIsFar(true),
-          new ActuateHood(false),
           new SetTurretTrackMode(),
           new SetShooterSpeedRPM(Constants.AUTO_SHOOT_MID_SHOT_RPM)
           );

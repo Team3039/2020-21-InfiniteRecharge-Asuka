@@ -17,7 +17,6 @@ public class ActuateIntake extends CommandBase {
   boolean lowerIntake;
   public ActuateIntake(boolean lowerIntake) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.intake);
     this.lowerIntake = lowerIntake;
   }
 

@@ -52,6 +52,9 @@ public class Robot extends TimedRobot {
      public static double targetY; //Vertical Offset From Crosshair To Target (-20.5 degrees to 20.5 degrees)
      public static double targetArea; //Target Area (0% of image to 100% of image)
 
+     public static double calculatedHoodPose;
+     public static boolean Far;
+     public static double RPM;
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -79,8 +82,6 @@ public class Robot extends TimedRobot {
 
     SmartDashboard.putData("Autonomous", autonTaskChooser);
 
-    
-
     UsbCamera usbCamera = CameraServer.getInstance().startAutomaticCapture();
     usbCamera.setVideoMode(VideoMode.PixelFormat.kYUYV, 320, 180, 60);
     servoPose = 0.5;
@@ -107,6 +108,23 @@ public class Robot extends TimedRobot {
     targetY = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0);
     targetArea = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
     CommandScheduler.getInstance().run();
+
+    if (targetArea <= Constants.LIMELIGHT_IS_FAR_AREA) {
+      Far = true;
+      RPM = 6500;
+    }
+    else {
+      Far = false;
+      RPM = 5000;
+    }
+
+    if (targetArea == 0) {
+      calculatedHoodPose = 1;
+    }
+    else {
+      calculatedHoodPose = RobotContainer.shooter.calculateDesiredHoodPosition(targetArea);
+    }
+    SmartDashboard.putNumber("Calculated Output", calculatedHoodPose);
   }
 
   /**

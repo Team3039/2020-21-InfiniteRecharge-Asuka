@@ -22,8 +22,10 @@ public class IndexCells extends SequentialCommandGroup {
   public IndexCells() {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
-    super(new ActuateIntake(false),
+    super(
+          new ActuateIntake(false),
           new SetIntakeSpeed(0),
-          new SetHopperIntakingMode());
+          new SetHopperIntakingMode()
+          );
   }
 }

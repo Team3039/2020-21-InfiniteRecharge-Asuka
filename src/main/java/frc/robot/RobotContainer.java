@@ -2,10 +2,12 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.button.Button;
+import frc.robot.commands.ActuateIntake;
 import frc.robot.commands.DeployWinches;
 import frc.robot.commands.RetractClimbArms;
 import frc.robot.commands.SetClimbArmSpeed;
 import frc.robot.commands.SetHood;
+import frc.robot.commands.SetHoodPositionCalculatedOutput;
 import frc.robot.commands.SetHopperIdleMode;
 import frc.robot.commands.SetHopperUnjamMode;
 import frc.robot.commands.SetIntakeSpeed;
@@ -31,7 +33,7 @@ import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Turret;
 
 public class RobotContainer {
- 
+
   public final static Drive drive = Drive.getInstance();
   public final static Intake intake = new Intake();
   public final static Turret turret = new Turret();
@@ -44,44 +46,43 @@ public class RobotContainer {
 
   public static Timer timer = new Timer();
 
-  //Declare Button Objects here
-  //Driver Buttons
-		Button driverTriangle = driverPad.getButtonTriangle();
-		Button driverSquare = driverPad.getButtonSquare();
-		Button driverCircle = driverPad.getButtonCircle();
-    Button driverX = driverPad.getButtonX();
-		Button driverShare = driverPad.getShareButton();
-		Button driverOptions = driverPad.getOptionsButton();
-		Button driverPadButton = driverPad.getButtonPad();
-		Button driverL1 = driverPad.getL1();
-		// Button driverL2 = driverPad.getL2();
-		Button driverL3 = driverPad.getL3();
-		Button driverR1 = driverPad.getR1();
-		// Button driverR2 = driverPad.getR2();
-    Button driverR3 = driverPad.getR3();
-    Button startButton = driverPad.getStartButton();
-    Button driverR2 = driverPad.getR2();
+  // Declare Button Objects here
+  // Driver Buttons
+  Button driverTriangle = driverPad.getButtonTriangle();
+  Button driverSquare = driverPad.getButtonSquare();
+  Button driverCircle = driverPad.getButtonCircle();
+  Button driverX = driverPad.getButtonX();
+  Button driverShare = driverPad.getShareButton();
+  Button driverOptions = driverPad.getOptionsButton();
+  Button driverPadButton = driverPad.getButtonPad();
+  Button driverL1 = driverPad.getL1();
+  Button driverL2 = driverPad.getL2();
+  Button driverL3 = driverPad.getL3();
+  Button driverR1 = driverPad.getR1();
+  Button driverR3 = driverPad.getR3();
+  Button startButton = driverPad.getStartButton();
+  Button driverDPadUp = driverPad.getDPadUp();
+  Button driverDPadDown = driverPad.getDPadDown();
 
-		//Operator Buttons
-		Button operatorTriangle = operatorPad.getButtonTriangle();
-		Button operatorSquare = operatorPad.getButtonSquare();
-		Button operatorCircle = operatorPad.getButtonCircle();
-		Button operatorX = operatorPad.getButtonX();
-		Button operatorShare = operatorPad.getShareButton();
-		Button operatorOptions = operatorPad.getOptionsButton();
-		Button operatorPadButton = operatorPad.getButtonPad();
-		Button operatorL1 = operatorPad.getL1();
-		Button operatorL2 = operatorPad.getL2();
-		Button operatorR1 = operatorPad.getR1();
-		Button operatorR2 = operatorPad.getR2();
-  
+  // Operator Buttons
+  Button operatorTriangle = operatorPad.getButtonTriangle();
+  Button operatorSquare = operatorPad.getButtonSquare();
+  Button operatorCircle = operatorPad.getButtonCircle();
+  Button operatorX = operatorPad.getButtonX();
+  Button operatorShare = operatorPad.getShareButton();
+  Button operatorOptions = operatorPad.getOptionsButton();
+  Button operatorPadButton = operatorPad.getButtonPad();
+  Button operatorL1 = operatorPad.getL1();
+  Button operatorL2 = operatorPad.getL2();
+  Button operatorR1 = operatorPad.getR1();
+  Button operatorR2 = operatorPad.getR2();
+
   public RobotContainer() {
     configureButtonBindings();
   }
 
-  //Put Button Bindings Here
+  // Put Button Bindings Here
   private void configureButtonBindings() {
-
     
     //Driver
     // driverL1.whileHeld(new DeployWinches());
@@ -96,12 +97,20 @@ public class RobotContainer {
     // startButton.whileHeld(new SetClimbArmSpeed(.4));
     // startButton.whenReleased(new SetClimbArmSpeed(0));
     driverL1.whileHeld(new IntakeCells());
+    driverL1.whenReleased(new ResetHopper());
+    driverTriangle.whenPressed(new ShootNearShot());
+    driverSquare.whenPressed(new ShootMidShot());
     driverX.whenPressed(new ShootFarShot());
     driverR1.whileHeld(new FeedCells());
+    driverCircle.whenPressed(new SetHood(1));
     // When the feed command ends, the systems are all reset
     driverR1.whenReleased(new ResetHopper());
     driverR1.whenReleased(new ResetShooter());
-    driverOptions.whenPressed(new SetTurretTrackMode());
+    driverOptions.whileHeld(new SetTurretTrackMode());
+    driverDPadUp.whenPressed(new ActuateIntake(true));
+    driverDPadDown.whenPressed(new ActuateIntake(false));
+    driverL2.whileHeld(new SetIntakeSpeed(-.99));
+    driverL2.whenReleased(new SetIntakeSpeed(0));
 
     //Operator
     //When X is pressed it turns on the shooter to a set RPM (5800) raises the hood and starts tracking
@@ -111,7 +120,7 @@ public class RobotContainer {
     //When Triangle is pressed it turns on the shooter to a set RPM(4800) raises the hood and starts tracking
     operatorTriangle.whenPressed(new ShootNearShot());
     //When Right Bumper is held the intake comes down and the intaking sequence runs 
-    // operatorR1.whileHeld(   new IntakeCells());
+    // operatorR1.whileHeld(new IntakeCells());
     // operatorR1.whenReleased(new IndexCells());
     //When Right Trigger is held the feeding sequence runs 
     operatorR2.whileHeld(new FeedCells());

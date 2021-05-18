@@ -26,14 +26,14 @@ public class Hopper extends SubsystemBase {
 
   public TalonSRX kickerWheel = new TalonSRX(RobotMap.kickerWheel);
   public TalonSRX backFeederBelt = new TalonSRX(RobotMap.backFeederBelt);
-  public TalonSRX frontFeederBeltWheel = new TalonSRX(RobotMap.fronFeederBeltWheel);
+  public TalonSRX frontFeederBeltWheel = new TalonSRX(RobotMap.frontFeederBeltWheel);
 
   public DigitalInput topBeam = new DigitalInput(RobotMap.topBeam);
   public DigitalInput lowBeam = new DigitalInput(RobotMap.lowBeam);
 
   public Hopper() {
     backFeederBelt.setInverted(false);
-    frontFeederBeltWheel.setInverted(true);
+    frontFeederBeltWheel.setInverted(false);
 
     backFeederBelt.setNeutralMode(NeutralMode.Brake);
     frontFeederBeltWheel.setNeutralMode(NeutralMode.Brake);
@@ -116,10 +116,10 @@ public class Hopper extends SubsystemBase {
           break;
         case FEEDING:
             if (RobotContainer.shooter.isFar) {
-            setHopperSpeed(.7, .4, .4);
+            setHopperSpeed(.7, .4, .35);
             }
             else {
-              setHopperSpeed(.7, .4, .4);
+              setHopperSpeed(.7, .4, .35);
             }
           break;
         case UNJAMMING:

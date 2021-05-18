@@ -16,6 +16,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.RobotMap;
@@ -39,7 +40,10 @@ public class Turret extends SubsystemBase {
     setLed(false);
     setPipeline(0);
     setCamMode(false);
-    turret.config_kP(0, 0.05);
+    turret.config_kP(0, 0.06);
+    // turret.config_kI(0, 0.001);
+    turret.config_kD(0, 0.19);
+    // turret.config_kF(0, 0.0001);
     turret.selectProfileSlot(0, 0);
   }
 
@@ -216,6 +220,7 @@ public class Turret extends SubsystemBase {
           break;
         case JOYSTICK:
           manualControl();
+          resetPose();
           break;
         case CLIMB:
           turretReverse();

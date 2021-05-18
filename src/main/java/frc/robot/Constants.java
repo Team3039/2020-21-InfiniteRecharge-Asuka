@@ -22,8 +22,8 @@ import edu.wpi.first.wpilibj.util.Units;
 
 public final class Constants {
     //Drive 
-    public static final double DRIVER_Y = .8;
-    public static final double DRIVER_ROT = .45;
+    public static final double DRIVER_Y = .9;
+    public static final double DRIVER_ROT = .7;
 
     // 2020 Drive Constants
     public static final double kWheelDiameterInches = 5.835;
@@ -53,7 +53,7 @@ public final class Constants {
     public static final double kRamseteZeta = 0.7;
 
     //Turret
-    public static final double kP_TURRET = -0.027;
+    public static final double kP_TURRET = -0.03;
     public static final double TURRET_RATIO = 15155.2;
 
     public static final double PPR = 3.7;
@@ -73,6 +73,9 @@ public final class Constants {
     public static final double SHOOT_NEAR_SHOT_RPM = 4975;
     public static final double SHOOT_MID_SHOT_RPM = 5750;
     public static final double SHOOT_FAR_SHOT_RPM = 5000;
+    public static final double SHOOT_FAR_SHOT_RPM_FAR = 6500;
+
+    public static final double LIMELIGHT_IS_FAR_AREA = 0.70;
 
     public static final double AUTO_SHOOT_NEAR_SHOT_RPM = 5000;
     public static final double AUTO_SHOOT_MID_SHOT_RPM =  5600;

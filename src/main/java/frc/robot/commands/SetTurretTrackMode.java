@@ -25,7 +25,6 @@ public class SetTurretTrackMode extends CommandBase {
   public void initialize() {
     RobotContainer.turret.setControlMode(TurretControlMode.TRACKING);
   }
-
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {

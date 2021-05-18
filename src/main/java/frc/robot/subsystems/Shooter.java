@@ -38,8 +38,6 @@ public class Shooter extends SubsystemBase {
     public TalonFX shooterB = new TalonFX(RobotMap.shooterB);
     public VictorSPX topWheel = new VictorSPX(RobotMap.climberC);
 
-    public Solenoid hood = new Solenoid(RobotMap.hood);
-
     public Servo hoodServoA = new Servo(RobotMap.hoodServo);
     public Servo hoodServoB = new Servo(RobotMap.hoodServoB);
     
@@ -72,15 +70,6 @@ public class Shooter extends SubsystemBase {
         shooterB.clearStickyFaults();
 
         shooterB.follow(shooterA);
-    }
-
-    public void actuateHood(boolean lowerHood) {
-        if (lowerHood){
-            hood.set(true);
-        } 
-        else{
-            hood.set(false);
-        }
     }
 
     public void setHoodPosition(double theta) {
@@ -123,6 +112,22 @@ public class Shooter extends SubsystemBase {
 
     public void setTopWheel(double speed) {
         topWheel.set(ControlMode.PercentOutput, speed);
+    }
+
+    public double calculateDesiredHoodPosition(double x) {
+        double a = 1.49787;
+        double b = 0.537159;
+        double c = -7.36445;
+        double d = 12.3024;
+        double f = -27.0558;
+        double g = 28.2696;
+        double h = -11.8597;
+        double i = 1.79898;
+
+        double desiredPosition = 0;
+        // (a*Math.pow(x, b)) + (c*Math.pow(x, (b-1))) + (d*Math.pow(x, (b-2))) + (f*Math.pow(x, (b-3))) + (g*Math.pow(x, (b-4))) + (h*Math.pow(x, (b-5))) + (i*Math.pow(x, (b-6)));
+        
+        return desiredPosition;
     }
 
     public double shooterRPMToNativeUnits(double rpm) {

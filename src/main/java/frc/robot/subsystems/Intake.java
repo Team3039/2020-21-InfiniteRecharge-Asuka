@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -21,12 +22,12 @@ import frc.robot.RobotMap;
  */
 public class Intake extends SubsystemBase {
 
-  public TalonSRX intake = new TalonSRX(RobotMap.intake);
+  public VictorSPX intake = new VictorSPX(RobotMap.intake);
   
   public Solenoid intakeTilt = new Solenoid(RobotMap.intakeTilt);
 
   public Intake() {
-    intake.setNeutralMode(NeutralMode.Brake);
+    intake.setNeutralMode(NeutralMode.Coast);
   }
 
   public void acuateIntake(boolean lowerIntake){
@@ -41,9 +42,9 @@ public class Intake extends SubsystemBase {
     intake.set(ControlMode.PercentOutput, percentOutput);
   }
 
-  public double getIntakeCurrent(){
-    return intake.getStatorCurrent();
-  }
+  // public double getIntakeCurrent(){
+  //   return intake.getStatorCurrent();
+  // }
 
   @Override
   public void periodic() {

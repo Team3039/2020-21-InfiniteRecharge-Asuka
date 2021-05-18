@@ -16,12 +16,12 @@ public class RobotMap {
   public static int shooterA = 6;
   public static int shooterB = 7;
   public static int turret = 2;
-  public static int intake = 1;
+  public static int intake = 0;
 
   //Indexer
   public final static int kickerWheel = 11;
   public final static int backFeederBelt = 9;
-  public final static int fronFeederBeltWheel = 10;
+  public final static int frontFeederBeltWheel = 10;
 
   //Color Wheel
   public final static int spinner = 9;
@@ -33,11 +33,10 @@ public class RobotMap {
 
 
 //SOLENOID
-  public final static int intakeTilt = 0;
+  public final static int intakeTilt = 3;
   public final static int climbDeployer = 4;
   public final static int buddyDeploy = 2;
   public final static int climbRelease = 1;
-  public final static int hood = 3;
 //PWM
   public final static int hoodServo = 0;
   public final static int hoodServoB = 1;
