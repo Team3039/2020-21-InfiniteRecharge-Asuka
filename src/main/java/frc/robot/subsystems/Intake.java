@@ -25,7 +25,7 @@ public class Intake extends SubsystemBase {
     intake.set(ControlMode.PercentOutput, 0);
   }
 
-  public void actuateIntake(){
+  public void extendIntake(){
     intakeTilt.set(true);
   }
   public void retractIntake(){

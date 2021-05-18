@@ -5,7 +5,6 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
 import frc.robot.RobotContainer;
 
 public class Drive extends CommandBase {
@@ -21,7 +20,7 @@ public class Drive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.driveSubsystem.driveWithJoysticks();
+    RobotContainer.drive.driveWithJoysticks();
   }
 
   // Called once the command ends or is interrupted.
