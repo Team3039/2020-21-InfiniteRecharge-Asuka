@@ -100,7 +100,6 @@ public class Drive extends SubsystemBase {
     mRightSlave1.configFactoryDefault();
 
     m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getGyroFusedHeadingAngleDeg()));
-
   }
 
   public static Drive getInstance() {

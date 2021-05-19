@@ -144,12 +144,14 @@ public class Shooter extends SubsystemBase {
 
     @Override
     public void periodic() {
+
         if (getShooterRPM() >= 5100) {
             isFar = true;
         }
         else {
             isFar = false;
         }
+
         SmartDashboard.putBoolean("Is Far", isFar());
         System.out.println(hoodServoA.getPosition());
     }

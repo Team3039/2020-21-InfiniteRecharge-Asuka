@@ -22,8 +22,10 @@ import edu.wpi.first.wpilibj.util.Units;
 
 public final class Constants {
     //Drive 
-    public static final double DRIVER_Y = .9;
-    public static final double DRIVER_ROT = .7;
+    public static final double DRIVER_Y = 0.9;
+    public static final double DRIVER_ROT = 0.7;
+
+    public static final double TURRET_ROT = 0.6;
 
     // 2020 Drive Constants
     public static final double kWheelDiameterInches = 5.835;

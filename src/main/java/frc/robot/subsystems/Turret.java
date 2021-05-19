@@ -41,9 +41,7 @@ public class Turret extends SubsystemBase {
     setPipeline(0);
     setCamMode(false);
     turret.config_kP(0, 0.06);
-    // turret.config_kI(0, 0.001);
     turret.config_kD(0, 0.19);
-    // turret.config_kF(0, 0.0001);
     turret.selectProfileSlot(0, 0);
   }
 
@@ -181,7 +179,7 @@ public class Turret extends SubsystemBase {
       turret.set(ControlMode.PercentOutput, .1);
     }
     else {
-      turret.set(ControlMode.PercentOutput, RobotContainer.getOperator().getLeftXAxis());
+      turret.set(ControlMode.PercentOutput, RobotContainer.getOperator().getLeftXAxis() * Constants.TURRET_ROT);
     }
   }
   
@@ -220,7 +218,6 @@ public class Turret extends SubsystemBase {
           break;
         case JOYSTICK:
           manualControl();
-          resetPose();
           break;
         case CLIMB:
           turretReverse();

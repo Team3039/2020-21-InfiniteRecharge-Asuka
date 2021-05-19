@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import frc.robot.commands.ActuateIntake;
 import frc.robot.commands.DeployWinches;
-import frc.robot.commands.RetractClimbArms;
 import frc.robot.commands.SetClimbArmSpeed;
 import frc.robot.commands.SetHood;
 import frc.robot.commands.SetHoodPositionCalculatedOutput;
@@ -13,6 +12,8 @@ import frc.robot.commands.SetHopperUnjamMode;
 import frc.robot.commands.SetIntakeSpeed;
 import frc.robot.commands.SetShooterSpeed;
 import frc.robot.commands.SetTurretClimbMode;
+import frc.robot.commands.SetTurretDriverMode;
+import frc.robot.commands.SetTurretJoystickMode;
 import frc.robot.commands.SetTurretTrackMode;
 import frc.robot.commands.ShiftServo;
 import frc.robot.commands.sequences.ClimbDeploy;
@@ -46,8 +47,6 @@ public class RobotContainer {
 
   public static Timer timer = new Timer();
 
-  // Declare Button Objects here
-  // Driver Buttons
   Button driverTriangle = driverPad.getButtonTriangle();
   Button driverSquare = driverPad.getButtonSquare();
   Button driverCircle = driverPad.getButtonCircle();
@@ -64,7 +63,6 @@ public class RobotContainer {
   Button driverDPadUp = driverPad.getDPadUp();
   Button driverDPadDown = driverPad.getDPadDown();
 
-  // Operator Buttons
   Button operatorTriangle = operatorPad.getButtonTriangle();
   Button operatorSquare = operatorPad.getButtonSquare();
   Button operatorCircle = operatorPad.getButtonCircle();
@@ -83,19 +81,7 @@ public class RobotContainer {
 
   // Put Button Bindings Here
   private void configureButtonBindings() {
-    
-    //Driver
-    // driverL1.whileHeld(new DeployWinches());
-    // driverR1.whileHeld(new IntakeCells());
-    // driverR1.whenReleased(new IndexCells());
-    // driverOptions.whileHeld(new RetractClimbArms(.50));
-    // driverOptions.whenReleased(new RetractClimbArms(0));
-    // driverX.whileHeld(new SetHood(0.4));
-    // driverPadButton.whileHeld(new SetHood(1));
-    // driverTriangle.whenPressed(new SetTurretClimbMode());
-    // driverShare.whenPressed(new ClimbDeploy());
-    // startButton.whileHeld(new SetClimbArmSpeed(.4));
-    // startButton.whenReleased(new SetClimbArmSpeed(0));
+
     driverL1.whileHeld(new IntakeCells());
     driverL1.whenReleased(new ResetHopper());
     driverTriangle.whenPressed(new ShootNearShot());
@@ -103,7 +89,6 @@ public class RobotContainer {
     driverX.whenPressed(new ShootFarShot());
     driverR1.whileHeld(new FeedCells());
     driverCircle.whenPressed(new SetHood(1));
-    // When the feed command ends, the systems are all reset
     driverR1.whenReleased(new ResetHopper());
     driverR1.whenReleased(new ResetShooter());
     driverOptions.whileHeld(new SetTurretTrackMode());
@@ -111,30 +96,24 @@ public class RobotContainer {
     driverDPadDown.whenPressed(new ActuateIntake(false));
     driverL2.whileHeld(new SetIntakeSpeed(-.99));
     driverL2.whenReleased(new SetIntakeSpeed(0));
+    driverPadButton.whenPressed(new ClimbDeploy());
+    driverPadButton.whileHeld(new SetClimbArmSpeed(0.5));
+    driverShare.whileHeld(new SetClimbArmSpeed(-0.3));
+    driverOptions.whileHeld(new SetTurretJoystickMode());
+    driverOptions.whenReleased(new SetTurretDriverMode());
 
-    //Operator
-    //When X is pressed it turns on the shooter to a set RPM (5800) raises the hood and starts tracking
     operatorX.whenPressed(new ShootFarShot());
-    //When Circle is pressed it turns on the shooter to a set RPM (5250) raises the hood and starts tracking
     operatorCircle.whenPressed(new ShootMidShot());
-    //When Triangle is pressed it turns on the shooter to a set RPM(4800) raises the hood and starts tracking
     operatorTriangle.whenPressed(new ShootNearShot());
-    //When Right Bumper is held the intake comes down and the intaking sequence runs 
-    // operatorR1.whileHeld(new IntakeCells());
-    // operatorR1.whenReleased(new IndexCells());
-    //When Right Trigger is held the feeding sequence runs 
     operatorR2.whileHeld(new FeedCells());
-    // When the feed command ends, the systems are all reset
     operatorR2.whenReleased(new ResetHopper());
     operatorR2.whenReleased(new ResetShooter());
-
     operatorL1.whileHeld(new SetIntakeSpeed(.6));
     operatorL1.whileHeld(new SetShooterSpeed(-.8));
     operatorL1.whileHeld(new SetHopperUnjamMode());
     operatorL1.whenReleased(new SetIntakeSpeed(0));
     operatorL1.whenReleased(new SetHopperIdleMode());
     operatorL1.whenReleased(new SetShooterSpeed(0));
-
     operatorL2.whenPressed(new ResetHopper());
     operatorL2.whenPressed(new ResetShooter()); 
   }

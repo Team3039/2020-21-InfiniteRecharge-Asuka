@@ -15,6 +15,7 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
+import frc.robot.subsystems.Turret.TurretControlMode;
 
 public class Climber extends SubsystemBase {
   
@@ -27,25 +28,42 @@ public class Climber extends SubsystemBase {
     climberA.setInverted(true);
     climberB.setInverted(true);
     climberB.follow(climberA);
+
+    climberA.setNeutralMode(NeutralMode.Brake);
+    climberB.setNeutralMode(NeutralMode.Brake);
+  }
+  
+  public enum ClimberControlMode {
+    IDLE,
+    CLIMB
+  }
+
+  public final static Climber INSTANCE = new Climber();
+
+  public ClimberControlMode climberControlMode = ClimberControlMode.IDLE;
+
+  public static Climber getInstance() {
+    return INSTANCE;
+  }
+
+  public ClimberControlMode getControlMode() {
+    return climberControlMode;
+  }
+
+  public void setControlMode(ClimberControlMode controlMode) {
+    this.climberControlMode = controlMode;
   }
 
   public void actuateClimb() {
-    climbRelease.set(true);
+    getInstance().getControlMode();
+    if (getControlMode().equals(ClimberControlMode.CLIMB))
+      climbRelease.set(false);
+    else {
+      climbRelease.set(true);
+    }
   }
 
-  public void deploy(double percentOutput) {
-    // climberC.set(ControlMode.PercentOutput, Math.abs(percentOutput));
-  }
-
-  public void release(double percentOutput) {
-    // climberC.set(ControlMode.PercentOutput, percentOutput * -1);
-  }
-
-  public void retract(double power) {
-    climberA.set(ControlMode.PercentOutput, (power * -1));
-  }
-
-  public void extend(double power){
+  public void setClimberSpeed(double power){
     climberA.set(ControlMode.PercentOutput, Math.abs(power));;
   }
 
@@ -55,5 +73,16 @@ public class Climber extends SubsystemBase {
 
   @Override
   public void periodic() {
+    synchronized (Climber.this) {
+      switch(getControlMode()) {
+        case CLIMB:
+          actuateClimb();          
+          break;
+        default:
+          setClimberSpeed(0);
+          actuateClimb();
+          break;
+      }
+    }
   }
 }

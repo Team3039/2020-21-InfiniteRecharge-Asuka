@@ -31,9 +31,10 @@ public class Intake extends SubsystemBase {
   }
 
   public void acuateIntake(boolean lowerIntake){
-    if(lowerIntake){
+    if (lowerIntake){
       intakeTilt.set(true);
-    }else {
+    }
+    else {
       intakeTilt.set(false);
     }
   }
@@ -41,10 +42,6 @@ public class Intake extends SubsystemBase {
   public void setIntakeSpeed(double percentOutput) {
     intake.set(ControlMode.PercentOutput, percentOutput);
   }
-
-  // public double getIntakeCurrent(){
-  //   return intake.getStatorCurrent();
-  // }
 
   @Override
   public void periodic() {
