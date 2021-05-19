@@ -55,7 +55,7 @@ public class Drive extends SubsystemBase {
   // Subsystem Instance
   private final static Drive INSTANCE = new Drive();
 
-  private Drive() {
+  public Drive() {
     mLeftMaster = new WPI_TalonFX(RobotMap.leftFrontDrive);
     mLeftSlave1 = new TalonFX(RobotMap.leftRearDrive);
 
