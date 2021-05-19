@@ -25,8 +25,8 @@ public class Drive extends SubsystemBase {
   }
   
   public void driveWithJoysticks() {
-    double y = RobotContainer.driverPad.getLeftYAxis() * Constants.y;
-    double rot = RobotContainer.driverPad.getRightXAxis() * Constants.rot;
+    double y = RobotContainer.driverPad.getLeftYAxis() * Constants.DRIVER_Y;
+    double rot = RobotContainer.driverPad.getRightXAxis() * Constants.DRIVER_ROT;
 
     double leftOutput = y + rot;
     double rightOutput = y - rot; 
