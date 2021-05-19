@@ -23,7 +23,7 @@ public class SetHoodPositionCalculatedOutput extends CommandBase {
   @Override
   public void execute() {
     // RobotContainer.shooter.setHoodPosition(Robot.calculatedHoodPose);
-    RobotContainer.shooter.setHoodPosition(RobotContainer.shooter.calculateDesiredHoodPosition(Robot.targetArea));
+    RobotContainer.shooter.setHoodPosition(Robot.calculatedHoodPose);
   }
 
   // Called once the command ends or is interrupted.

@@ -124,8 +124,14 @@ public class Shooter extends SubsystemBase {
         double h = -11.8597;
         double i = 1.79898;
 
-        double desiredPosition = 0;
-        // (a*Math.pow(x, b)) + (c*Math.pow(x, (b-1))) + (d*Math.pow(x, (b-2))) + (f*Math.pow(x, (b-3))) + (g*Math.pow(x, (b-4))) + (h*Math.pow(x, (b-5))) + (i*Math.pow(x, (b-6)));
+        double desiredPosition = 
+            (a*Math.pow(x, b)) + 
+            (c*Math.pow(x, (b-1))) + 
+            (d*Math.pow(x, (b-2))) + 
+            (f*Math.pow(x, (b-3))) + 
+            (g*Math.pow(x, (b-4))) + 
+            (h*Math.pow(x, (b-5))) + 
+            (i*Math.pow(x, (b-6)));
         
         return desiredPosition;
     }

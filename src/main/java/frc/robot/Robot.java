@@ -55,6 +55,7 @@ public class Robot extends TimedRobot {
      public static double calculatedHoodPose;
      public static boolean Far;
      public static double RPM;
+
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -124,6 +125,7 @@ public class Robot extends TimedRobot {
     else {
       calculatedHoodPose = RobotContainer.shooter.calculateDesiredHoodPosition(targetArea);
     }
+    
     SmartDashboard.putNumber("Calculated Output", calculatedHoodPose);
   }
 
