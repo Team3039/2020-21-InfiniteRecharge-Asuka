@@ -26,6 +26,10 @@ public final class Constants {
     public static final double DRIVER_ROT = 0.7;
 
     public static final double TURRET_ROT = 0.6;
+    public static final double HOOD_TICKS_PER_DEGREE = 1/45;
+
+    public static final double HOOD_MINIMUM_VALUE = 100;
+    public static final double HOOD_RANGE = 45;
 
     // 2020 Drive Constants
     public static final double kWheelDiameterInches = 5.835;

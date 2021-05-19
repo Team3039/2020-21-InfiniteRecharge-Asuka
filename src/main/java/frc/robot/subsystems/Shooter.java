@@ -27,6 +27,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpiutil.math.MathUtil;
+import frc.robot.Constants;
 import frc.robot.RobotMap;
 
 /**
@@ -75,6 +76,11 @@ public class Shooter extends SubsystemBase {
     public void setHoodPosition(double theta) {
         hoodServoA.set(theta);
         hoodServoB.set(Math.abs(1-theta));
+    }
+
+    public void setHoodPositionDegrees(double theta) {
+        hoodServoA.set(degreesToTicks(theta));
+        hoodServoB.set(degreesToTicks(theta));
     }
 
     public double getServoPose() {
@@ -140,6 +146,16 @@ public class Shooter extends SubsystemBase {
         return rpm * SHOOTER_OUTPUT_TO_ENCODER_RATIO * TICKS_PER_ROTATION / 10.0 / 60.0;
     }
 
+    public double degreesToTicks(double degrees) {
+        double updatedDegrees = MathUtil.clamp(degrees, 100, 145);
+        return (updatedDegrees - Constants.HOOD_MINIMUM_VALUE) / Constants.HOOD_RANGE;
+      }
+
+    public double ticksToDegrees(double ticks) {
+        double updatedTicks = MathUtil.clamp(ticks, 0, 1);
+        return (updatedTicks * Constants.HOOD_RANGE) + Constants.HOOD_MINIMUM_VALUE;
+    }
+
     public void setIsFar(boolean isFar){
         this.isFar = isFar;
     }
@@ -158,7 +174,6 @@ public class Shooter extends SubsystemBase {
             isFar = false;
         }
 
-        SmartDashboard.putBoolean("Is Far", isFar());
         System.out.println(hoodServoA.getPosition());
     }
 }
