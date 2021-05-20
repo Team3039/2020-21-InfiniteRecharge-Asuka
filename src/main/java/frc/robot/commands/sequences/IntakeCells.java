@@ -8,11 +8,8 @@
 package frc.robot.commands.sequences;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.ActuateIntake;
 import frc.robot.commands.SetHopperIntakingMode;
 import frc.robot.commands.SetIntakeSpeed;
-import frc.robot.commands.SetShooterSpeedRPM;
-import frc.robot.commands.SetTopWheel;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:

@@ -3,22 +3,15 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import frc.robot.commands.ActuateIntake;
-import frc.robot.commands.DeployWinches;
-import frc.robot.commands.SetClimbArmSpeed;
 import frc.robot.commands.SetHood;
-import frc.robot.commands.SetHoodPositionCalculatedOutput;
 import frc.robot.commands.SetHopperIdleMode;
 import frc.robot.commands.SetHopperUnjamMode;
 import frc.robot.commands.SetIntakeSpeed;
 import frc.robot.commands.SetShooterSpeed;
-import frc.robot.commands.SetTurretClimbMode;
 import frc.robot.commands.SetTurretDriverMode;
 import frc.robot.commands.SetTurretJoystickMode;
 import frc.robot.commands.SetTurretTrackMode;
-import frc.robot.commands.ShiftServo;
-import frc.robot.commands.sequences.ClimbDeploy;
 import frc.robot.commands.sequences.FeedCells;
-import frc.robot.commands.sequences.IndexCells;
 import frc.robot.commands.sequences.IntakeCells;
 import frc.robot.commands.sequences.ResetHopper;
 import frc.robot.commands.sequences.ResetShooter;
@@ -26,7 +19,7 @@ import frc.robot.commands.sequences.ShootFarShot;
 import frc.robot.commands.sequences.ShootMidShot;
 import frc.robot.commands.sequences.ShootNearShot;
 import frc.robot.controllers.PS4Gamepad;
-import frc.robot.subsystems.Climber;
+// import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.Intake;
@@ -36,17 +29,20 @@ import frc.robot.subsystems.Turret;
 public class RobotContainer {
 
   public final static Drive drive = Drive.getInstance();
+
   public final static Intake intake = new Intake();
   public final static Turret turret = new Turret();
   public final static Hopper hopper = new Hopper();
   public final static Shooter shooter = new Shooter();
-  public final static Climber climber = new Climber();
+  // public final static Climber climber = new Climber();
 
   public static PS4Gamepad driverPad = new PS4Gamepad(RobotMap.DRIVER_JOYSTICK_1_USB_ID);
   public static PS4Gamepad operatorPad = new PS4Gamepad(RobotMap.OPERATOR_JOYSTICK_1_USB_ID);
+  public static PS4Gamepad testPad = new PS4Gamepad(RobotMap.TEST_JOYSTICK_1_USB_ID);
 
   public static Timer timer = new Timer();
 
+  //<<-- Button Definitions -->//
   Button driverTriangle = driverPad.getButtonTriangle();
   Button driverSquare = driverPad.getButtonSquare();
   Button driverCircle = driverPad.getButtonCircle();
@@ -79,7 +75,7 @@ public class RobotContainer {
     configureButtonBindings();
   }
 
-  // Put Button Bindings Here
+  //<<-- Button Functionality-->>//
   private void configureButtonBindings() {
 
     driverL1.whileHeld(new IntakeCells());
@@ -96,9 +92,8 @@ public class RobotContainer {
     driverDPadDown.whenPressed(new ActuateIntake(false));
     driverL2.whileHeld(new SetIntakeSpeed(-.99));
     driverL2.whenReleased(new SetIntakeSpeed(0));
-    driverPadButton.whenPressed(new ClimbDeploy());
-    driverPadButton.whileHeld(new SetClimbArmSpeed(0.5));
-    driverShare.whileHeld(new SetClimbArmSpeed(-0.3));
+    // driverPadButton.whileHeld(new SetClimbArmSpeed(0.5));
+    // driverShare.whileHeld(new SetClimbArmSpeed(-0.3));
     driverOptions.whileHeld(new SetTurretJoystickMode());
     driverOptions.whenReleased(new SetTurretDriverMode());
 
@@ -115,7 +110,9 @@ public class RobotContainer {
     operatorL1.whenReleased(new SetHopperIdleMode());
     operatorL1.whenReleased(new SetShooterSpeed(0));
     operatorL2.whenPressed(new ResetHopper());
-    operatorL2.whenPressed(new ResetShooter()); 
+    operatorL2.whenPressed(new ResetShooter());
+
+
   }
 
   //Get Controller Objects

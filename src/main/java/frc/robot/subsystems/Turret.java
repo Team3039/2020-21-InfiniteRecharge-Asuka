@@ -16,7 +16,6 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpiutil.math.MathUtil;
 import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.RobotContainer;
@@ -38,9 +37,11 @@ public class Turret extends SubsystemBase {
     turret.setSelectedSensorPosition(0);
     turret.configSelectedFeedbackCoefficient(TURRET_PPR_TO_DEGREES); //Convert to Degrees of Revolution
     turret.setSensorPhase(true);
+
     setLed(false);
     setPipeline(0);
     setCamMode(false);
+
     turret.config_kP(0, 0.06);
     turret.config_kD(0, 0.19);
     turret.selectProfileSlot(0, 0);
@@ -88,10 +89,10 @@ public class Turret extends SubsystemBase {
   public void trackTarget() {
     double errorX = (0 - getTargetX()) * kP_TURRET;
 
-    if (getTurretSwitch() && getTurretPosition() > 245) {
+    if (getTurretSwitch() && getTurretPosition() > Constants.TURRET_RIGHT_SOFT_LIMIT) {
       turret.set(ControlMode.PercentOutput, -.1);
     }
-    else if (getTurretSwitch() && getTurretPosition() < -110) {
+    else if (getTurretSwitch() && getTurretPosition() < Constants.TURRET_LEFT_SOFT_LIMIT) {
       turret.set(ControlMode.PercentOutput, .1);
     }
     else {
@@ -102,10 +103,10 @@ public class Turret extends SubsystemBase {
   public void resetPose() {
     double errorX = (getTurretPosition()) * kP_TURRET;
 
-    if (getTurretSwitch() && getTurretPosition() > 245) {
+    if (getTurretSwitch() && getTurretPosition() > Constants.TURRET_RIGHT_SOFT_LIMIT) {
       turret.set(ControlMode.PercentOutput, -.1);
     }
-    else if (getTurretSwitch() && getTurretPosition() < -110) {
+    else if (getTurretSwitch() && getTurretPosition() < Constants.TURRET_LEFT_SOFT_LIMIT) {
       turret.set(ControlMode.PercentOutput, .1);
     }
     else {
@@ -173,10 +174,10 @@ public class Turret extends SubsystemBase {
   }
 
   public void manualControl() {
-    if (getTurretSwitch() && getTurretPosition() > 245) {
+    if (getTurretSwitch() && getTurretPosition() > Constants.TURRET_RIGHT_SOFT_LIMIT) {
       turret.set(ControlMode.PercentOutput, -.1);
     }
-    else if (getTurretSwitch() && getTurretPosition() < -110) {
+    else if (getTurretSwitch() && getTurretPosition() < Constants.TURRET_LEFT_SOFT_LIMIT) {
       turret.set(ControlMode.PercentOutput, .1);
     }
     else {
@@ -186,10 +187,10 @@ public class Turret extends SubsystemBase {
   
   public void turretReverse() {
     double errorX = (getTurretPosition() - 180) * kP_TURRET;
-    if (getTurretSwitch() && getTurretPosition() > 245) {
+    if (getTurretSwitch() && getTurretPosition() > Constants.TURRET_RIGHT_SOFT_LIMIT) {
       turret.set(ControlMode.PercentOutput, -.1);
     }
-    else if (getTurretSwitch() && getTurretPosition() < -110) {
+    else if (getTurretSwitch() && getTurretPosition() < Constants.TURRET_LEFT_SOFT_LIMIT) {
       turret.set(ControlMode.PercentOutput, .1);
     }
     else {

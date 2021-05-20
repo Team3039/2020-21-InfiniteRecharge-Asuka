@@ -1,11 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2019 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
-
 package frc.robot;
 
 import edu.wpi.cscore.UsbCamera;
@@ -27,21 +19,14 @@ import frc.robot.auto.routines.AutoSafe;
 import frc.robot.auto.routines.AutoSlalomPath;
 import frc.robot.auto.routines.AutoTrench8Ball;
 import frc.robot.auto.routines.AutoTrenchSteal;
-// import frc.robot.auto.routines.TestA;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Turret.TurretControlMode;
 
-/**
- * The VM is configured to automatically run this class, and to call the functions corresponding to
- * each mode, as described in the TimedRobot documentation. If you change the name of this class or
- * the package after creating this project, you must also update the build.gradle file in the
- * project.
- */
 public class Robot extends TimedRobot {
+
   public Command m_autonomousCommand;
   private SendableChooser<Command> autonTaskChooser;
   public static double servoPose;
-
 
   RobotContainer m_robotContainer;
   private Drive drive = Drive.getInstance();
@@ -56,14 +41,9 @@ public class Robot extends TimedRobot {
      public static boolean Far;
      public static double RPM;
 
-  /**
-   * This function is run when the robot is first started up and should be used for any
-   * initialization code.
-   */
   @Override
   public void robotInit() {
-    // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
-    // autonomous chooser on the dashboard.
+
     m_robotContainer = new RobotContainer();
     drive.resetOdometry(new Pose2d());
  
@@ -88,21 +68,11 @@ public class Robot extends TimedRobot {
     servoPose = 0.5;
   }
 
-  /**
-   * This function is called every robot packet, no matter the mode. Use this for items like
-   * diagnostics that you want ran during disabled, autonomous, teleoperated and test.
-   *
-   * <p>This runs after the mode specific periodic functions, but before
-   * LiveWindow and SmartDashboard integrated updating.
-   */
   @Override
   public void robotPeriodic() {
     SmartDashboard.putNumber("SERVO POSE", RobotContainer.shooter.getServoPose());
-    // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
-    // commands, running already-scheduled commands, removing finished or interrupted commands,
-    // and running subsystem periodic() methods. This must be called from the robot's periodic
-    // block in order for anything in 
-    //  Command-based framework to work.
+    SmartDashboard.putNumber("TURRET POSE", RobotContainer.turret.getCurrentPosition());
+
     //Gather Vision Info
     targetValid = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0);
     targetX = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
@@ -129,13 +99,10 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Calculated Output", calculatedHoodPose);
   }
 
-  /**
-   * This function is called once each time the robot enters Disabled mode.
-   */
   @Override
   public void disabledInit() {
     drive.resetOdometry(new Pose2d());
-    // RobotContainer.turret.setControlMode(TurretControlMode.DRIVER);
+    RobotContainer.turret.setControlMode(TurretControlMode.DRIVER);
   }
 
   @Override
@@ -153,15 +120,6 @@ public class Robot extends TimedRobot {
 
     m_autonomousCommand = new AutoBouncePath();
 
-
-    /*
-     * String autoSelected = SmartDashboard.getString("Auto Selector",
-     * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-     * = new MyAutoCommand(); break; case "Default Auto": default:
-     * autonomousCommand = new ExampleCommand(); break; }
-     */
-
-    // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
@@ -171,16 +129,10 @@ public class Robot extends TimedRobot {
    * This function is called periodically during autonomous.
    */
   @Override
-  public void autonomousPeriodic() {
-
-  }
+  public void autonomousPeriodic() {}
 
   @Override
   public void teleopInit() {
-    // This makes sure that the autonomous stops running when
-    // teleop starts running. If you want the autonomous to
-    // continue until interrupted by another command, remove
-    // this line or comment it out.
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
@@ -188,24 +140,18 @@ public class Robot extends TimedRobot {
     RobotContainer.turret.setControlMode(TurretControlMode.DRIVER);
   }
 
-  /**
-   * This function is called periodically during operator control.
-   */
   @Override
   public void teleopPeriodic() {
   }
 
   @Override
   public void testInit() {
-    // Cancels all running commands at the start of test mode.
     CommandScheduler.getInstance().cancelAll();
   }
 
-  /**
-   * This function is called periodically during test mode.
-   */
   @Override
   public void testPeriodic() {
+
   }
 
   public static double getTime(){

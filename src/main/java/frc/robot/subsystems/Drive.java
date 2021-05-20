@@ -24,7 +24,8 @@ import frc.robot.RobotMap;
 public class Drive extends SubsystemBase {
 
   public enum DriveControlMode {
-    JOYSTICK, PATH_FOLLOWING
+    JOYSTICK, 
+    PATH_FOLLOWING,
   }
 
   private DriveControlMode driveControlMode = DriveControlMode.JOYSTICK;
@@ -325,14 +326,5 @@ public class Drive extends SubsystemBase {
           System.out.println("Unknown drive control mode: " + currentControlMode);
       }
     }
-
-    // SmartDashboard.putNumber("Left Distance Inches: ", getLeftWheelDistanceInches());
-    // SmartDashboard.putNumber("Right Distance Inches: ", getRightWheelDistanceInches());
-
-    // SmartDashboard.putNumber("Left Distance Meters: ", getLeftWheelDistanceMeters());
-    // SmartDashboard.putNumber("Right Distance Meters: ", getRightWheelDistanceMeters());
-
-    // SmartDashboard.putNumber("Heading: ", getGyroFusedHeadingAngleDeg());
-
   }
 }

@@ -8,7 +8,6 @@
 package frc.robot.commands.sequences;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.ActuateIntake;
 import frc.robot.commands.SetHopperIdleMode;
 import frc.robot.commands.SetIntakeSpeed;
 

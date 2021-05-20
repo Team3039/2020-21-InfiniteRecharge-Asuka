@@ -27,6 +27,8 @@ public final class Constants {
 
     public static final double TURRET_ROT = 0.6;
     public static final double HOOD_TICKS_PER_DEGREE = 1/45;
+    public static final double TURRET_RIGHT_SOFT_LIMIT = 293;
+    public static final double TURRET_LEFT_SOFT_LIMIT = -101;
 
     public static final double HOOD_MINIMUM_VALUE = 100;
     public static final double HOOD_RANGE = 45;

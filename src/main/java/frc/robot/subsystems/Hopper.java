@@ -10,7 +10,6 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -93,6 +92,7 @@ public class Hopper extends SubsystemBase {
   public void periodic() {
     SmartDashboard.putBoolean("Top Beam", getTopBeam());
     SmartDashboard.putBoolean("Low Beam", getLowBeam());
+    
     synchronized (Hopper.this) {
       switch (getControlMode()) {
         case IDLE:

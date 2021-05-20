@@ -4,6 +4,7 @@ public class RobotMap {
 //HID
   public final static int DRIVER_JOYSTICK_1_USB_ID = 0;
   public final static int OPERATOR_JOYSTICK_1_USB_ID = 1;
+  public final static int TEST_JOYSTICK_1_USB_ID = 3;
 
 //CAN
   //Drive
