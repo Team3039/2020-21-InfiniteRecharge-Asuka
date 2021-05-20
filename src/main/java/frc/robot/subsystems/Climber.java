@@ -25,15 +25,15 @@ public class Climber extends SubsystemBase {
     climberRight.follow(climberLeft);
   }
 
-  public void releaseClimber(){
-    release.set(false);
+  public void releaseClimber() {
+    release.set(true);
   }
 
   public void runWinches(double power) {
     climberLeft.set(ControlMode.PercentOutput, power);
   }
 
-  public void stopWinches(){
+  public void stopWinches() {
     climberLeft.set(ControlMode.PercentOutput, 0);
   }
 
