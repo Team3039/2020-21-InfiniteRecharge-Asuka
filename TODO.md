@@ -1,0 +1,5 @@
+- Shooter Gearbox Loose
+- Turret Limit Switch Trigger
+- Brackets to mount blinds on hopper
+- Hood Regression
+- Hood Tight on one side

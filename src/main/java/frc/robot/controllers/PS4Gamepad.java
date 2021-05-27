@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  * Contains functions for use with the Playstation 4 controller.
  * Credit to these guys
  * @author Joshua Lewis joshlewi14@gmail.com
- *  @author Thomas Floyd tefloyd1215@att.net and
+ * @author Thomas Floyd tefloyd1215@att.net and
  */
 public class PS4Gamepad extends Joystick {
 	// Gamepad axis ports
