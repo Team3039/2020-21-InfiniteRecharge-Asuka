@@ -10,13 +10,14 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
+import frc.robot.RobotMap;
 
 public class Drive extends SubsystemBase {
 
-  TalonFX leftFrontDrive = new TalonFX(4); 
-  TalonFX leftRearDrive = new TalonFX(5);
-  TalonFX rightFrontDrive = new TalonFX(12);
-  TalonFX rightRearDrive = new TalonFX(13); 
+  TalonFX leftFrontDrive = new TalonFX(RobotMap.leftFrontDrive); 
+  TalonFX leftRearDrive = new TalonFX(RobotMap.leftRearDrive);
+  TalonFX rightFrontDrive = new TalonFX(RobotMap.rightFrontDrive);
+  TalonFX rightRearDrive = new TalonFX(RobotMap.rightRearDrive); 
   
   /** Creates a new Drive. */
   public Drive() {

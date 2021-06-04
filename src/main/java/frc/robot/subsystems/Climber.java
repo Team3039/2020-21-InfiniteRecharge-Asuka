@@ -5,39 +5,39 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotContainer;
+import frc.robot.RobotMap;
 
 public class Climber extends SubsystemBase {
+  /** Creates a new Climber. */
 
-  public TalonSRX climberLeft = new TalonSRX(1);
-  public TalonSRX climberRight = new TalonSRX(2);
+  public TalonSRX climberA = new TalonSRX(RobotMap.climberA);
+  public TalonSRX climberB  = new TalonSRX(RobotMap.climberB);
 
-  public Solenoid release = new Solenoid(0);
+  public Solenoid climbDeployer = new Solenoid(RobotMap.climbDeployer);
+
+  public void setClimberSpeed(double ClimbSpeed) {
+    climberA.set(ControlMode.PercentOutput, ClimbSpeed);
+  } 
+
+  public void actuateClimb(boolean isExtended) {
+    if (isExtended == true) {
+      climbDeployer.set(true);}
+    else {
+      climbDeployer.set(false);}
+  }
 
   public Climber() {
-    climberLeft.setNeutralMode(NeutralMode.Brake);
-    climberRight.setNeutralMode(NeutralMode.Brake);
-
-    climberRight.follow(climberLeft);
+    climberB.follow(climberA);
   }
-
-  public void releaseClimber() {
-    release.set(true);
-  }
-
-  public void runWinches(double power) {
-    climberLeft.set(ControlMode.PercentOutput, power);
-  }
-
-  public void stopWinches() {
-    climberLeft.set(ControlMode.PercentOutput, 0);
-  }
-
+  
   @Override
   public void periodic() {
+    // This method will be called once per scheduler run
   }
 }

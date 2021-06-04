@@ -10,26 +10,29 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotMap;
 
 public class Intake extends SubsystemBase {
 
-  public Solenoid intakeTilt = new Solenoid(0);
+  public Solenoid intakeTilt = new Solenoid(RobotMap.intakeTilt);
 
-  public TalonSRX intake = new TalonSRX(0);
+  public TalonSRX intake = new TalonSRX(RobotMap.intake);
 
-  public void runIntake(){
-    intake.set(ControlMode.PercentOutput, .9);
+  public void setIntakeSpeed(double intakeSpeed) {
+    intake.set(ControlMode.PercentOutput, intakeSpeed);
   }
   
   public void stopIntake(){
     intake.set(ControlMode.PercentOutput, 0);
   }
 
-  public void extendIntake(){
-    intakeTilt.set(true);
-  }
-  public void retractIntake(){
-    intakeTilt.set(false);
+  public void actuateIntake(boolean isExtended) {
+    if (isExtended == true) {
+      intakeTilt.set(true);
+    }
+    else {
+      intakeTilt.set(false);
+    }
   }
   
   /** Creates a new Intake. */

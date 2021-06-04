@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.Button;
+import frc.robot.commands.ActuateIntake;
+import frc.robot.commands.SetIntakeSpeed;
 import frc.robot.controllers.PS4Gamepad;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Intake;
@@ -23,7 +25,7 @@ public class RobotContainer {
   public static Drive drive = new Drive();
   public static Intake intake = new Intake();
   public static PS4Gamepad driverPad = new PS4Gamepad(0);
-  public static Climber climb = new Climber();
+  public static Climber climber = new Climber();
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
@@ -41,6 +43,9 @@ Button driverTriangle = driverPad.getButtonTriangle();
 
 
   private void configureButtonBindings() {
+    driverTriangle.whenPressed(new ActuateIntake(true));
+    driverTriangle.whenReleased(new ActuateIntake(false));
+    driverCircle.whileHeld(new SetIntakeSpeed(.9));
   }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
