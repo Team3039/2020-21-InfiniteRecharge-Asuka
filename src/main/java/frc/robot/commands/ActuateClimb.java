@@ -5,27 +5,18 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
 import frc.robot.RobotContainer;
 
-public class ShiftServo extends CommandBase {
-  /** Creates a new ShiftServo. */
-  double originalPose;
-  double newPose;
-  double shiftVal;
-  
-  public ShiftServo(double shiftVal) {
-    this.shiftVal = shiftVal;
-    originalPose = Robot.servoPose;
-    newPose = originalPose + shiftVal;
+public class ActuateClimb extends CommandBase {
+  /** Creates a new ActuateClimber. */
+  public ActuateClimb() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.shooter.setHoodPosition(newPose);
-    Robot.servoPose = newPose;
+    RobotContainer.climber.actuateClimb();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -40,8 +31,6 @@ public class ShiftServo extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (Robot.servoPose == newPose)
-      return true;
-    return false;
+    return true;
   }
 }

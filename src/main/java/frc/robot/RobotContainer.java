@@ -19,6 +19,7 @@ import frc.robot.commands.sequences.ShootFarShot;
 import frc.robot.commands.sequences.ShootMidShot;
 import frc.robot.commands.sequences.ShootNearShot;
 import frc.robot.controllers.PS4Gamepad;
+import frc.robot.subsystems.Climber;
 // import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Hopper;
@@ -34,7 +35,7 @@ public class RobotContainer {
   public final static Turret turret = new Turret();
   public final static Hopper hopper = new Hopper();
   public final static Shooter shooter = new Shooter();
-  // public final static Climber climber = new Climber();
+  public final static Climber climber = new Climber();
 
   public static PS4Gamepad driverPad = new PS4Gamepad(RobotMap.DRIVER_JOYSTICK_1_USB_ID);
   public static PS4Gamepad operatorPad = new PS4Gamepad(RobotMap.OPERATOR_JOYSTICK_1_USB_ID);
@@ -92,8 +93,6 @@ public class RobotContainer {
     driverDPadDown.whenPressed(new ActuateIntake(false));
     driverL2.whileHeld(new SetIntakeSpeed(-.99));
     driverL2.whenReleased(new SetIntakeSpeed(0));
-    // driverPadButton.whileHeld(new SetClimbArmSpeed(0.5));
-    // driverShare.whileHeld(new SetClimbArmSpeed(-0.3));
     driverOptions.whileHeld(new SetTurretJoystickMode());
     driverOptions.whenReleased(new SetTurretDriverMode());
 
@@ -111,8 +110,6 @@ public class RobotContainer {
     operatorL1.whenReleased(new SetShooterSpeed(0));
     operatorL2.whenPressed(new ResetHopper());
     operatorL2.whenPressed(new ResetShooter());
-
-
   }
 
   //Get Controller Objects
