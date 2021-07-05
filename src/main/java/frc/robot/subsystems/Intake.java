@@ -10,7 +10,6 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
 import frc.robot.RobotMap;
 
 public class Intake extends SubsystemBase {
@@ -19,8 +18,8 @@ public class Intake extends SubsystemBase {
 
   public TalonSRX intake = new TalonSRX(RobotMap.intake);
 
-  public void setIntakeSpeed() {
-    intake.set(ControlMode.PercentOutput, Constants.INTAKE_SPEED);
+  public void setIntakeSpeed(double intakeSpeed) {
+    intake.set(ControlMode.PercentOutput, intakeSpeed);
   }
   
   public void stopIntake(){
@@ -28,7 +27,12 @@ public class Intake extends SubsystemBase {
   }
 
   public void actuateIntake(boolean isExtended) {
-    intakeTilt.set(isExtended);
+    if (isExtended == true) {
+      intakeTilt.set(true);
+    }
+    else {
+      intakeTilt.set(false);
+    }
   }
   
   /** Creates a new Intake. */

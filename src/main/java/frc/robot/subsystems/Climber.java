@@ -8,7 +8,9 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotContainer;
 import frc.robot.RobotMap;
 
 public class Climber extends SubsystemBase {
@@ -24,8 +26,10 @@ public class Climber extends SubsystemBase {
   } 
 
   public void actuateClimb(boolean isExtended) {
-    climbDeployer.set(isExtended);
-     
+    if (isExtended == true) {
+      climbDeployer.set(true);}
+    else {
+      climbDeployer.set(false);}
   }
 
   public Climber() {
