@@ -69,7 +69,7 @@ public class Shooter extends SubsystemBase {
     public double shooterRPMToNativeUnits(double rpm) {
         return rpm * SHOOTER_OUTPUT_TO_ENCODER_RATIO * TICKS_PER_ROTATION / 10.0 / 60.0;
     }
-
+    
     @Override
     public void periodic() {
     }

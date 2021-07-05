@@ -83,8 +83,11 @@ public final class Constants {
     public static final double AUTO_SHOOT_MID_SHOT_RPM =  5600;
     public static final double AUTO_SHOOT_FAR_SHOT_RPM = 4900;
 
-    //Color Wheel
-    public static final double COLOR_WHEEL_PPR = 0;
+    //Hopper
+    public static final double AGITATE_SPEED = 0.7;
+    public static final double FEED_WHEEL_SPEED = 0.75;
+    public static final double BELT_WHEEL_SPEED = 0.6;
 
-    public static final double TRIGGER_TOLERANCE = .1;
+    //Intake
+    public static final double INTAKE_SPEED = .9;
 }
