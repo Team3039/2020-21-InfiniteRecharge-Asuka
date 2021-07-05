@@ -40,23 +40,21 @@ public class Hopper extends SubsystemBase {
   
   //Main Control Method AKA what move the balls according to the sensor input
   public void index() {
-   if (getTopBeam() == true && getLowBeam() == true) {
-    stopBeltFeed();
-    stopAgitator();
-    stopWheelFeed(); }
-   else if (getTopBeam() == true && getLowBeam() == false) {
-    runBeltFeed();
-    agitateHopper();
-    stopWheelFeed(); }
-   else if (getTopBeam() == false && getLowBeam() == true) {
-    runBeltFeed();
-    agitateHopper();
-    runWheelFeed(); }
-   else if (getTopBeam() == false && getLowBeam() == false) {
-    runBeltFeed();
-    agitateHopper();
-    runWheelFeed();}
-   }
+    if (getTopBeam() && getLowBeam()) {
+      stopFeed();
+    }
+    else if (getTopBeam() && !getLowBeam()) {
+      runBeltFeed();
+      agitateHopper();
+      stopWheelFeed(); 
+    }
+    else if (!getTopBeam() && getLowBeam()) {
+      feed();
+    }
+    else if (!getTopBeam() && !getLowBeam()) {
+      feed();
+    }
+  }
   
 
   //Shuffles the Balls around
@@ -88,7 +86,15 @@ public class Hopper extends SubsystemBase {
 
   //Constant Ball Feed w/o Indexing
   public void feed() {
+    runWheelFeed();
+    runBeltFeed();
+    agitateHopper();
+  }
 
+  public void stopFeed() {
+    stopWheelFeed();
+    stopBeltFeed();
+    stopAgitator();
   }
 
 }
