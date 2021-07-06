@@ -5,12 +5,11 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.RobotContainer;
 import frc.robot.RobotMap;
 
 public class Climber extends SubsystemBase {
@@ -19,21 +18,20 @@ public class Climber extends SubsystemBase {
   public TalonSRX climberA = new TalonSRX(RobotMap.climberA);
   public TalonSRX climberB  = new TalonSRX(RobotMap.climberB);
 
-  public Solenoid climbDeployer = new Solenoid(RobotMap.climbDeployer);
-
-  public void setClimberSpeed(double ClimbSpeed) {
-    climberA.set(ControlMode.PercentOutput, ClimbSpeed);
-  } 
-
-  public void actuateClimb(boolean isExtended) {
-    if (isExtended == true) {
-      climbDeployer.set(true);}
-    else {
-      climbDeployer.set(false);}
-  }
+  public Solenoid release = new Solenoid(RobotMap.climbDeployer);
 
   public Climber() {
     climberB.follow(climberA);
+    climberA.setNeutralMode(NeutralMode.Brake);
+    setRelease(true);
+  }
+
+  public void setClimberSpeed(double percentOutput) {
+    climberA.set(ControlMode.PercentOutput, percentOutput);
+  } 
+
+  public void setRelease(boolean isReleased) {
+    release.set(isReleased);
   }
   
   @Override

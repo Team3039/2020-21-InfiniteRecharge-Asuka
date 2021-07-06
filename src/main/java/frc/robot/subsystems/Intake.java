@@ -18,6 +18,10 @@ public class Intake extends SubsystemBase {
 
   public TalonSRX intake = new TalonSRX(RobotMap.intake);
 
+  /** Creates a new Intake. */
+  public Intake() {
+  }
+
   public void setIntakeSpeed(double intakeSpeed) {
     intake.set(ControlMode.PercentOutput, intakeSpeed);
   }
@@ -27,16 +31,7 @@ public class Intake extends SubsystemBase {
   }
 
   public void actuateIntake(boolean isExtended) {
-    if (isExtended == true) {
-      intakeTilt.set(true);
-    }
-    else {
-      intakeTilt.set(false);
-    }
-  }
-  
-  /** Creates a new Intake. */
-  public Intake() {
+    intakeTilt.set(isExtended);
   }
 
   @Override

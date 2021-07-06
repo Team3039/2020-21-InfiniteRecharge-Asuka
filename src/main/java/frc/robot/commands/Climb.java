@@ -5,11 +5,13 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
+import frc.robot.RobotContainer;
 
-public class ActuateClimber extends CommandBase {
-  /** Creates a new ActuateClimber. */
-  public ActuateClimber() {
-    // Use addRequirements() here to declare subsystem dependencies.
+public class Climb extends CommandBase {
+  /** Creates a new Climb. */
+  public Climb() {
+    addRequirements(RobotContainer.climber);
   }
 
   // Called when the command is initially scheduled.
@@ -18,11 +20,15 @@ public class ActuateClimber extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    RobotContainer.climber.setClimberSpeed(Constants.CLIMB_SPEED);
+  }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    RobotContainer.climber.setClimberSpeed(0);
+  }
 
   // Returns true when the command should end.
   @Override

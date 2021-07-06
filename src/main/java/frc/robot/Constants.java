@@ -27,7 +27,7 @@ public final class Constants {
 
     public static final double TURRET_ROT = 0.6;
 
-    // 2020 Drive Constants
+    //2020-GameChangers Drive Constants
     public static final double kWheelDiameterInches = 5.835;
     public static final double kTrackWidthInches = 28.5;
     public static final double kDriveEncoderPPR = 2048;
@@ -70,8 +70,8 @@ public final class Constants {
     public static final double SHOOTER_OUTPUT_TO_ENCODER_RATIO = .44;
     public static final double TICKS_PER_ROTATION = 2048.0;
     public static final int kLongCANTimeOutMs = 100; 
-    public static final double kFlywheelTicksPerRevolution = 0;
 
+    /*Old RPMs
     public static final double SHOOT_NEAR_SHOT_RPM = 4975;
     public static final double SHOOT_MID_SHOT_RPM = 5750;
     public static final double SHOOT_FAR_SHOT_RPM = 5000;
@@ -82,9 +82,16 @@ public final class Constants {
     public static final double AUTO_SHOOT_NEAR_SHOT_RPM = 5000;
     public static final double AUTO_SHOOT_MID_SHOT_RPM =  5600;
     public static final double AUTO_SHOOT_FAR_SHOT_RPM = 4900;
+    */
 
-    //Color Wheel
-    public static final double COLOR_WHEEL_PPR = 0;
+    //Intake
+    public static final double AGITATE_SPEED = 0.8;
+    public static final double FEED_WHEEL_SPEED = 0.7;
+    public static final double BELT_WHEEL_SPEED = 0.6;
 
-    public static final double TRIGGER_TOLERANCE = .1;
+    //Intake
+    public static final double INTAKE_SPEED = .9;
+
+    //Climber
+    public static final double CLIMB_SPEED = .85;
 }

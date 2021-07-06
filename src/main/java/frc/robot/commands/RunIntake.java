@@ -5,31 +5,34 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
-public class SetIntakeSpeed extends CommandBase {
-  /** Creates a new SetIntakeSpeed. */
-  double intakeSpeed;
-  public SetIntakeSpeed(double intakeSpeed) {
-    this.intakeSpeed = intakeSpeed;
-    // Use addRequirements() here to declare subsystem dependencies.
+public class RunIntake extends CommandBase {
+  /** Creates a new RunIntake. */
+  public RunIntake() {
+    addRequirements(RobotContainer.intake);
+    addRequirements(RobotContainer.hopper);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    RobotContainer.intake.actuateIntake(true);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.intake.setIntakeSpeed(intakeSpeed);
+    RobotContainer.hopper.index();
+    RobotContainer.intake.setIntakeSpeed(Constants.INTAKE_SPEED);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     RobotContainer.intake.setIntakeSpeed(0);
+    RobotContainer.intake.actuateIntake(false);
   }
 
   // Returns true when the command should end.

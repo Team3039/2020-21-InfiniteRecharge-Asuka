@@ -63,6 +63,12 @@ public class Shooter extends SubsystemBase {
     }
 
     public void setShooterRPM(double rpm) {
+        if(rpm == 0) {
+            topWheel.set(ControlMode.PercentOutput, 0);
+        }
+        else {
+            topWheel.set(ControlMode.PercentOutput, .9);
+        }
         shooterA.set(ControlMode.Velocity, shooterRPMToNativeUnits(rpm));
     }
 
