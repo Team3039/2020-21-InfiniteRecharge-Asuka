@@ -12,7 +12,7 @@ import frc.robot.Constants;
 import frc.robot.RobotContainer;
 import frc.robot.RobotMap;
 
-public class Drive extends SubsystemBase {
+public class Drivetrain extends SubsystemBase {
 
   TalonFX leftFrontDrive = new TalonFX(RobotMap.leftFrontDrive); 
   TalonFX leftRearDrive = new TalonFX(RobotMap.leftRearDrive);
@@ -20,17 +20,17 @@ public class Drive extends SubsystemBase {
   TalonFX rightRearDrive = new TalonFX(RobotMap.rightRearDrive); 
   
   /** Creates a new Drive. */
-  public Drive() {
+  public Drivetrain() {
     leftRearDrive.follow(leftFrontDrive);
     rightRearDrive.follow(rightFrontDrive); 
   }
   
   public void driveWithJoysticks() {
     double y = RobotContainer.driverPad.getLeftYAxis() * Constants.DRIVER_Y;
-    double rot = RobotContainer.driverPad.getRightXAxis() * Constants.DRIVER_ROT;
+    double rot = RobotContainer.driverPad.getRightXAxis() * Constants.DRIVER_ROT * -1;
 
-    double leftOutput = y + rot;
-    double rightOutput = y - rot; 
+    double leftOutput = rot + y;
+    double rightOutput = rot - y; 
     
     leftFrontDrive.set(ControlMode.PercentOutput, leftOutput);
     rightFrontDrive.set(ControlMode.PercentOutput, rightOutput); 
@@ -38,6 +38,6 @@ public class Drive extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+    driveWithJoysticks();
   }
 }

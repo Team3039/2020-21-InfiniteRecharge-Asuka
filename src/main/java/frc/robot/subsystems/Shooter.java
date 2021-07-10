@@ -39,8 +39,8 @@ public class Shooter extends SubsystemBase {
     public boolean isFar = false;
 
     public Shooter() {
-        shooterA.configFactoryDefault();
-        shooterB.configFactoryDefault();
+        shooterA.setInverted(true);
+        shooterB.setInverted(false);
         shooterA.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
         shooterB.follow(shooterA);
 

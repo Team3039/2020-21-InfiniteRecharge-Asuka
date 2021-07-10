@@ -44,9 +44,9 @@ public class Hopper extends SubsystemBase {
       stopFeed();
     }
     else if (getTopBeam() && !getLowBeam()) {
-      runBeltFeed();
+      stopBeltFeed();
       agitateHopper();
-      stopWheelFeed(); 
+      runWheelFeed(); 
     }
     else if (!getTopBeam() && getLowBeam()) {
       feed();
@@ -97,6 +97,9 @@ public class Hopper extends SubsystemBase {
     stopAgitator();
   }
 
+
+  @Override
+  public void periodic() {
+
+  }
 }
-  
-  

@@ -13,7 +13,7 @@ import frc.robot.commands.RunIntake;
 import frc.robot.commands.RunShooter;
 import frc.robot.controllers.PS4Gamepad;
 import frc.robot.subsystems.Climber;
-import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
@@ -25,7 +25,7 @@ import frc.robot.subsystems.Shooter;
  */
 public class RobotContainer {
 
-  public static Drive drive = new Drive();
+  public static Drivetrain drivetrain = new Drivetrain();
   public static Intake intake = new Intake();
   public static Climber climber = new Climber();
   public static Shooter shooter = new Shooter();
