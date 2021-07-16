@@ -15,15 +15,14 @@ public class RobotMap {
   //intake/shooter
   public static int shooterA = 6;
   public static int shooterB = 7;
-  public final static int TOP_WHEEL = 8;
+  public final static int topWheel = 8;
 
   public static int turret = 2;
   public static int intake = 0;
 
   //Indexer
-  public final static int HOPPER_AGITATOR = 8;
-  public final static int INDEXER_BELTS = 9;
-  public final static int KICKER_WHEEL = 10;
+  public final static int indexerBelts = 9;
+  public final static int kickerWheelandAgitator = 10;
 
   //Climber
   public final static int climberA = 3;

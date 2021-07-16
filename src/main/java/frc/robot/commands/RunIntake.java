@@ -24,8 +24,8 @@ public class RunIntake extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.hopper.index();
     RobotContainer.intake.setIntakeSpeed(Constants.INTAKE_SPEED);
+    RobotContainer.hopper.index();
   }
 
   // Called once the command ends or is interrupted.

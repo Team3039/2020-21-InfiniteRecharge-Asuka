@@ -9,7 +9,6 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -22,9 +21,8 @@ import frc.robot.RobotMap;
  */
 public class Hopper extends SubsystemBase {
 
-  public VictorSPX agitator = new VictorSPX(RobotMap.HOPPER_AGITATOR);
-  public TalonSRX beltFeed = new TalonSRX(RobotMap.INDEXER_BELTS);
-  public TalonSRX wheelFeed = new TalonSRX(RobotMap.KICKER_WHEEL);
+  public TalonSRX beltFeed = new TalonSRX(RobotMap.indexerBelts);
+  public TalonSRX wheelFeed = new TalonSRX(RobotMap.kickerWheelandAgitator);
 
   public DigitalInput topBeam = new DigitalInput(RobotMap.topBeam);
   public DigitalInput lowBeam = new DigitalInput(RobotMap.lowBeam);
@@ -45,8 +43,7 @@ public class Hopper extends SubsystemBase {
     }
     else if (getTopBeam() && !getLowBeam()) {
       stopBeltFeed();
-      agitateHopper();
-      runWheelFeed(); 
+      runWheelFeedandAgitator(); 
     }
     else if (!getTopBeam() && getLowBeam()) {
       feed();
@@ -57,13 +54,10 @@ public class Hopper extends SubsystemBase {
   }
   
 
-  //Shuffles the Balls around
-  public void agitateHopper() {
-    agitator.set(ControlMode.PercentOutput, Constants.AGITATE_SPEED); 
-  }
+
 
   //pushes balls into hopper
-  public void runWheelFeed() {
+  public void runWheelFeedandAgitator() {
     wheelFeed.set(ControlMode.PercentOutput, Constants.FEED_WHEEL_SPEED);
   }
 
@@ -72,11 +66,7 @@ public class Hopper extends SubsystemBase {
     beltFeed.set(ControlMode.PercentOutput, Constants.BELT_WHEEL_SPEED);
   }
 
-  public void stopAgitator() {
-    agitator.set(ControlMode.PercentOutput, 0); 
-  }
-
-  public void stopWheelFeed() {
+  public void stopWheelFeedandAgitator() {
     wheelFeed.set(ControlMode.PercentOutput, 0);
   }
 
@@ -86,20 +76,24 @@ public class Hopper extends SubsystemBase {
 
   //Constant Ball Feed w/o Indexing
   public void feed() {
-    runWheelFeed();
+    runWheelFeedandAgitator();
     runBeltFeed();
-    agitateHopper();
+
   }
 
   public void stopFeed() {
-    stopWheelFeed();
+    stopWheelFeedandAgitator();
     stopBeltFeed();
-    stopAgitator();
+  }
+
+  public void showBeamStates() {
+    System.out.println("the top beam is " + getTopBeam() + "\n");
+    System.out.println("the low beam is " + getLowBeam() + "\n\n\n");
   }
 
 
   @Override
   public void periodic() {
-
+    showBeamStates();
   }
 }

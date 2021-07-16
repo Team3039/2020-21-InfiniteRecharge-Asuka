@@ -31,7 +31,7 @@ public class Shooter extends SubsystemBase {
 
     public TalonFX shooterA = new TalonFX(RobotMap.shooterA);
     public TalonFX shooterB = new TalonFX(RobotMap.shooterB);
-    public VictorSPX topWheel = new VictorSPX(RobotMap.TOP_WHEEL);
+    public VictorSPX topWheel = new VictorSPX(RobotMap.topWheel);
 
     public Servo hoodServoA = new Servo(RobotMap.hoodServo);
     public Servo hoodServoB = new Servo(RobotMap.hoodServoB);

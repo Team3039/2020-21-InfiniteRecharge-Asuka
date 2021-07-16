@@ -86,8 +86,8 @@ public final class Constants {
 
     //Intake
     public static final double AGITATE_SPEED = 0.8;
-    public static final double FEED_WHEEL_SPEED = 0.6;
-    public static final double BELT_WHEEL_SPEED = 0.5;
+    public static final double FEED_WHEEL_SPEED = 0.3;
+    public static final double BELT_WHEEL_SPEED = 0.4;
 
     //Intake
     public static final double INTAKE_SPEED = .9;

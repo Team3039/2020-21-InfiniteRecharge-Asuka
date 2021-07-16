@@ -49,7 +49,7 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    operatorSquare.whileHeld(new RunIntake()); //Standard Intake Command, Runs Hopper/Indexer as well
+    operatorSquare.toggleWhenPressed(new RunIntake()); //Standard Intake Command, Runs Hopper/Indexer as well
     operatorCircle.toggleWhenPressed(new RunShooter(5000)); //Turns Shooter on
     operatorX.whileHeld(new FeedCells()); //Full Feed Cells through to be used whilst Shooting
 
