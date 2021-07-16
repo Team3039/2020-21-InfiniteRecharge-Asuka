@@ -11,6 +11,7 @@ import frc.robot.commands.FeedCells;
 import frc.robot.commands.ReleaseClimber;
 import frc.robot.commands.RunIntake;
 import frc.robot.commands.RunShooter;
+import frc.robot.commands.TestLimelight;
 import frc.robot.controllers.PS4Gamepad;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
@@ -44,6 +45,7 @@ public class RobotContainer {
 
   Button operatorCircle = operatorPad.getButtonCircle();
   Button operatorSquare = operatorPad.getButtonSquare();
+  Button operatorPadButton = operatorPad.getButtonPad();
   Button operatorX = operatorPad.getButtonX();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -54,7 +56,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
     operatorSquare.toggleWhenPressed(new RunIntake()); //Standard Intake Command, Runs Hopper/Indexer as well
     operatorCircle.toggleWhenPressed(new RunShooter(5000)); //Turns Shooter on
-    operatorX.whileHeld(new FeedCells()); //Full Feed Cells through to be used whilst Shooting
+    operatorX.whileHeld(new FeedCells());
 
     driverPadButton.whenPressed(new ReleaseClimber()); //Release Pneumatic on Climber
     driverR2.whileHeld(new Climb()); //Ratchet Climbers

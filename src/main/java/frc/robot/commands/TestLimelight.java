@@ -7,12 +7,9 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 
-public class RunShooter extends CommandBase {
-  /** Creates a new RunShooter. */
-  double rpm;
-  public RunShooter(double rpm) {
-    this.rpm = rpm;
-    addRequirements(RobotContainer.shooter);
+public class TestLimelight extends CommandBase {
+  /** Creates a new TestLimelight. */
+  public TestLimelight() {
     addRequirements(RobotContainer.turret);
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -21,21 +18,19 @@ public class RunShooter extends CommandBase {
   @Override
   public void initialize() {}
 
+
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.shooter.setShooterRPM(rpm);
     RobotContainer.turret.setTrackingMode();
-    RobotContainer.turret.trackTarget();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    RobotContainer.shooter.setShooterRPM(0);
     RobotContainer.turret.setDriverCamMode();
-    RobotContainer.turret.setTurretPosition(0);
   }
+
 
   // Returns true when the command should end.
   @Override

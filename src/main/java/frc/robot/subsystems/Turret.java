@@ -120,7 +120,6 @@ public class Turret extends SubsystemBase {
   }
 
   public void setTurretPosition(double degrees) {
-    turret.config_kP(0, 0.0001);
     double modDegrees = degrees % 360;
     turret.set(ControlMode.Position, modDegrees);
   }
