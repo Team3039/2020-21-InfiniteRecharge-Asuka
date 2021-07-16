@@ -16,7 +16,6 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpiutil.math.MathUtil;
 import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.RobotContainer;
@@ -40,23 +39,6 @@ public class Turret extends SubsystemBase {
     turret.config_kP(0, 0.06);
     turret.config_kD(0, 0.19);
     turret.selectProfileSlot(0, 0);
-  }
-
-  public enum TurretControlMode {
-    DRIVER, 
-    TRACKING,
-    JOYSTICK,
-    CLIMB
-  }
-
-  public TurretControlMode turretControlMode = TurretControlMode.DRIVER;
-
-  public synchronized TurretControlMode getControlMode() {
-    return turretControlMode;
-  }
-
-  public synchronized void setControlMode(TurretControlMode controlMode) {
-    this.turretControlMode = controlMode;
   }
 
   public void setLed(boolean isOn) {
@@ -133,7 +115,7 @@ public class Turret extends SubsystemBase {
     }
 }
 
-  public void resetTurretPosition() {
+  public void resetTurretSensor() {
     turret.setSelectedSensorPosition(0);
   }
 
@@ -176,7 +158,7 @@ public class Turret extends SubsystemBase {
       turret.set(ControlMode.PercentOutput, .1);
     }
     else {
-      turret.set(ControlMode.PercentOutput, RobotContainer.getOperator().getLeftXAxis() * Constants.TURRET_ROT);
+      turret.set(ControlMode.PercentOutput, RobotContainer.operatorPad.getLeftXAxis() * Constants.TURRET_ROT);
     }
   }
   
@@ -203,28 +185,28 @@ public class Turret extends SubsystemBase {
 
   @Override
   public void periodic() {
-    synchronized (Turret.this) {
-      switch (getControlMode()) {
-        case DRIVER:
-          setDriverCamMode();
-          resetPose();
-          break;
-        case TRACKING:
-          setTrackingMode();
-          trackTarget();
-          break;
-        case JOYSTICK:
-          manualControl();
-          break;
-        case CLIMB:
-          turretReverse();
-          break;
-        default:
-        setDriverCamMode();
-        resetPose();
-        break;
-      }
-    }
-    System.out.println(getCurrentPosition());
+    // synchronized (Turret.this) {
+    //   switch (getControlMode()) {
+    //     case DRIVER:
+    //       setDriverCamMode();
+    //       resetPose();
+    //       break;
+    //     case SHOOTING:
+    //       setTrackingMode();
+    //       trackTarget();
+    //       break;
+    //     case JOYSTICK:
+    //       manualControl();
+    //       break;
+    //     case CLIMB:
+    //       turretReverse();
+    //       break;
+    //     default:
+    //     setDriverCamMode();
+    //     resetPose();
+    //     break;
+    //   }
+    // }
+    
   }
 }

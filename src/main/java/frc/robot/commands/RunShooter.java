@@ -24,12 +24,16 @@ public class RunShooter extends CommandBase {
   @Override
   public void execute() {
     RobotContainer.shooter.setShooterRPM(rpm);
+    RobotContainer.turret.setTrackingMode();
+    RobotContainer.turret.trackTarget();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     RobotContainer.shooter.setShooterRPM(0);
+    RobotContainer.turret.setDriverCamMode();
+    RobotContainer.turret.setTurretPosition(0);
   }
 
   // Returns true when the command should end.

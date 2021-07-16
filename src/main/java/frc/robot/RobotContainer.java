@@ -17,6 +17,8 @@ import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Turret;
+
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -30,6 +32,7 @@ public class RobotContainer {
   public static Climber climber = new Climber();
   public static Shooter shooter = new Shooter();
   public static Hopper hopper = new Hopper();
+  public static Turret turret = new Turret();
 
   public static PS4Gamepad driverPad = new PS4Gamepad(0);
   public static PS4Gamepad operatorPad = new PS4Gamepad(1);
