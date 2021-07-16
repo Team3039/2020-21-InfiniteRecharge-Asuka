@@ -9,7 +9,9 @@ import frc.robot.RobotContainer;
 
 public class RunShooter extends CommandBase {
   /** Creates a new RunShooter. */
-  public RunShooter() {
+  double rpm;
+  public RunShooter(double rpm) {
+    this.rpm = rpm;
     addRequirements(RobotContainer.shooter);
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -21,7 +23,7 @@ public class RunShooter extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    RobotContainer.shooter.setShooterRPM(5000);
+    RobotContainer.shooter.setShooterRPM(rpm);
   }
 
   // Called once the command ends or is interrupted.

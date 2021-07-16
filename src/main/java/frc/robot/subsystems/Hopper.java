@@ -24,7 +24,7 @@ public class Hopper extends SubsystemBase {
 
   public VictorSPX agitator = new VictorSPX(RobotMap.HOPPER_AGITATOR);
   public TalonSRX beltFeed = new TalonSRX(RobotMap.INDEXER_BELTS);
-  public TalonSRX wheelFeed = new TalonSRX(RobotMap.INDEXER_WHEEL);
+  public TalonSRX wheelFeed = new TalonSRX(RobotMap.KICKER_WHEEL);
 
   public DigitalInput topBeam = new DigitalInput(RobotMap.topBeam);
   public DigitalInput lowBeam = new DigitalInput(RobotMap.lowBeam);

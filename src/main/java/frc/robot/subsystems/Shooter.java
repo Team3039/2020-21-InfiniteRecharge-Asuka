@@ -31,7 +31,7 @@ public class Shooter extends SubsystemBase {
 
     public TalonFX shooterA = new TalonFX(RobotMap.shooterA);
     public TalonFX shooterB = new TalonFX(RobotMap.shooterB);
-    public VictorSPX topWheel = new VictorSPX(RobotMap.climberC);
+    public VictorSPX topWheel = new VictorSPX(RobotMap.TOP_WHEEL);
 
     public Servo hoodServoA = new Servo(RobotMap.hoodServo);
     public Servo hoodServoB = new Servo(RobotMap.hoodServoB);
@@ -65,6 +65,7 @@ public class Shooter extends SubsystemBase {
     public void setShooterRPM(double rpm) {
         if(rpm == 0) {
             topWheel.set(ControlMode.PercentOutput, 0);
+            shooterA.set(ControlMode.PercentOutput, 0);
         }
         else {
             topWheel.set(ControlMode.PercentOutput, .9);

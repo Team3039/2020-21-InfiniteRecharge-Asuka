@@ -50,7 +50,7 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
     operatorSquare.whileHeld(new RunIntake()); //Standard Intake Command, Runs Hopper/Indexer as well
-    operatorCircle.whenPressed(new RunShooter()); //Turns Shooter on
+    operatorCircle.toggleWhenPressed(new RunShooter(5000)); //Turns Shooter on
     operatorX.whileHeld(new FeedCells()); //Full Feed Cells through to be used whilst Shooting
 
     driverPadButton.whenPressed(new ReleaseClimber()); //Release Pneumatic on Climber
