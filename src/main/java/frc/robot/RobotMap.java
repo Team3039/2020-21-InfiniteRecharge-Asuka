@@ -25,7 +25,7 @@ public class RobotMap {
   public final static int kickerWheelandAgitator = 10;
 
   //Climber
-  public final static int climberA = 3;
+  public final static int climberA = 1;
   public final static int climberB = 11;
 
 
