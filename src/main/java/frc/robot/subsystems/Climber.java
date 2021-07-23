@@ -18,7 +18,7 @@ public class Climber extends SubsystemBase {
   public TalonSRX climberA = new TalonSRX(RobotMap.climberA);
   public TalonSRX climberB  = new TalonSRX(RobotMap.climberB);
 
-  public Solenoid release = new Solenoid(RobotMap.climbDeployer);
+  public Solenoid release = new Solenoid(RobotMap.climbRelease);
 
   public Climber() {
     climberB.follow(climberA);
@@ -27,7 +27,7 @@ public class Climber extends SubsystemBase {
   }
 
   public void setClimberSpeed(double percentOutput) {
-    climberA.set(ControlMode.PercentOutput, percentOutput);
+    climberA.set(ControlMode.PercentOutput, percentOutput * -1);
   } 
 
   public void setRelease(boolean isReleased) {
