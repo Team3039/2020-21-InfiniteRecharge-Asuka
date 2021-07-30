@@ -8,7 +8,8 @@
 package frc.robot.subsystems;
 
 import static frc.robot.Constants.TURRET_PPR_TO_DEGREES;
-import static frc.robot.Constants.kP_TURRET;
+import static frc.robot.Constants.kP_TRACK_TURRET;
+import static frc.robot.Constants.kP_SET_TURRET;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -36,8 +37,7 @@ public class Turret extends SubsystemBase {
     setLed(false);
     setPipeline(0);
     setCamMode(false);
-    turret.config_kP(0, 0.06);
-    turret.config_kD(0, 0.19);
+    turret.config_kP(0, kP_SET_TURRET);
     turret.selectProfileSlot(0, 0);
   }
 
@@ -64,8 +64,8 @@ public class Turret extends SubsystemBase {
   }
 
   public void trackTarget() {
-    double errorX = (0 - getTargetX()) * kP_TURRET;
-
+    double errorX = (0 - getTargetX()) * kP_TRACK_TURRET;
+   
     if (getTurretSwitch() && getTurretPosition() > 245) {
       turret.set(ControlMode.PercentOutput, -.1);
     }
@@ -78,7 +78,7 @@ public class Turret extends SubsystemBase {
   }
   
   public void resetPose() {
-    double errorX = (getTurretPosition()) * kP_TURRET;
+    double errorX = (getTurretPosition()) * kP_TRACK_TURRET;
 
     if (getTurretSwitch() && getTurretPosition() > 245) {
       turret.set(ControlMode.PercentOutput, -.1);
@@ -120,8 +120,14 @@ public class Turret extends SubsystemBase {
   }
 
   public void setTurretPosition(double degrees) {
+    turret.config_kP(0, kP_SET_TURRET);
+    turret.config_kI(0, 0);
+    turret.config_kD(0, 0);
+    turret.config_kF(0, 0);
+
     double modDegrees = degrees % 360;
     turret.set(ControlMode.Position, modDegrees);
+
   }
 
   public double getTargetX() {
@@ -162,7 +168,7 @@ public class Turret extends SubsystemBase {
   }
   
   public void turretReverse() {
-    double errorX = (getTurretPosition() - 180) * kP_TURRET;
+    double errorX = (getTurretPosition() - 180) * kP_TRACK_TURRET;
     if (getTurretSwitch() && getTurretPosition() > 245) {
       turret.set(ControlMode.PercentOutput, -.1);
     }
@@ -184,6 +190,8 @@ public class Turret extends SubsystemBase {
 
   @Override
   public void periodic() {
+    System.out.println("POSITION: " + getCurrentPosition());
+    System.out.println("ERROR: " + turret.getClosedLoopError());
     // synchronized (Turret.this) {
     //   switch (getControlMode()) {
     //     case DRIVER:

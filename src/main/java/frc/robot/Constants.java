@@ -55,9 +55,10 @@ public final class Constants {
     public static final double kRamseteZeta = 0.7;
 
     //Turret
-    public static final double kP_TURRET = -0.03;
+    public static final double kP_TRACK_TURRET = -0.03;
     public static final double TURRET_RATIO = 15155.2;
-
+    public static final double  kP_SET_TURRET = 6.9;
+    
     public static final double PPR = 3.7;
     public static final double TURRET_PPR_TO_DEGREES = 360 / TURRET_RATIO; //How many degrees is one tick
 

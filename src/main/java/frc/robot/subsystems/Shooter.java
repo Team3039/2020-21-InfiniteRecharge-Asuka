@@ -20,6 +20,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
 
@@ -31,6 +32,7 @@ public class Shooter extends SubsystemBase {
     public TalonFX shooterA = new TalonFX(RobotMap.shooterA);
     public TalonFX shooterB = new TalonFX(RobotMap.shooterB);
     public VictorSPX topWheel = new VictorSPX(RobotMap.topWheel);
+    public Solenoid hoodServo = new Solenoid(RobotMap.hoodServo);
     
     public boolean isFar = false;
 

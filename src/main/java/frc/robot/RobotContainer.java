@@ -11,6 +11,7 @@ import frc.robot.commands.FeedCells;
 import frc.robot.commands.ReleaseClimber;
 import frc.robot.commands.RunIntake;
 import frc.robot.commands.RunShooter;
+import frc.robot.commands.TurretFlip;
 import frc.robot.controllers.PS4Gamepad;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
@@ -59,6 +60,7 @@ public class RobotContainer {
 
     driverPadButton.whenPressed(new ReleaseClimber()); //Release Pneumatic on Climber
     driverR2.whileHeld(new Climb()); //Ratchet Climbers
+    driverTriangle.toggleWhenPressed(new TurretFlip(180));
   }
 
   //TODO: Add Auto lol

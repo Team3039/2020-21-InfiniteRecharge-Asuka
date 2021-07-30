@@ -33,6 +33,7 @@ public class RobotMap {
 //0 - 3
   public final static int intakeTilt = 3;
   public final static int climbRelease = 1;
+  public final static int hoodServo = 0;
 
 //PWM
 

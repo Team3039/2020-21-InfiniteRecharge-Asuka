@@ -23,6 +23,8 @@ public class Climber extends SubsystemBase {
   public Climber() {
     climberB.follow(climberA);
     climberA.setNeutralMode(NeutralMode.Brake);
+    climberB.setNeutralMode(NeutralMode.Brake);
+
     setRelease(true);
   }
 
