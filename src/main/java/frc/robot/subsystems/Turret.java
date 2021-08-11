@@ -190,8 +190,8 @@ public class Turret extends SubsystemBase {
 
   @Override
   public void periodic() {
-    System.out.println("POSITION: " + getCurrentPosition());
-    System.out.println("ERROR: " + turret.getClosedLoopError());
+     System.out.println("POSITION: " + getCurrentPosition());
+     System.out.println("ERROR: " + turret.getClosedLoopError());
     // synchronized (Turret.this) {
     //   switch (getControlMode()) {
     //     case DRIVER:

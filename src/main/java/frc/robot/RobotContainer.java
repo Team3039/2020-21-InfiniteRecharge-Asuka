@@ -12,6 +12,7 @@ import frc.robot.commands.ReleaseClimber;
 import frc.robot.commands.RunIntake;
 import frc.robot.commands.RunShooter;
 import frc.robot.commands.TurretFlip;
+import frc.robot.commands.TestLimelight;
 import frc.robot.controllers.PS4Gamepad;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
@@ -42,6 +43,8 @@ public class RobotContainer {
   Button driverTriangle = driverPad.getButtonTriangle();
   Button driverPadButton = driverPad.getButtonPad();
   Button driverR2 = driverPad.getR2();
+  Button driverX = driverPad.getButtonX();
+  Button driverSquare = driverPad.getButtonSquare();
 
   Button operatorCircle = operatorPad.getButtonCircle();
   Button operatorSquare = operatorPad.getButtonSquare();
@@ -57,10 +60,17 @@ public class RobotContainer {
     operatorSquare.toggleWhenPressed(new RunIntake()); //Standard Intake Command, Runs Hopper/Indexer as well
     operatorCircle.toggleWhenPressed(new RunShooter(5000)); //Turns Shooter on
     operatorX.whileHeld(new FeedCells());
+    operatorPadButton.toggleWhenPressed(new TestLimelight());
 
     driverPadButton.whenPressed(new ReleaseClimber()); //Release Pneumatic on Climber
     driverR2.whileHeld(new Climb()); //Ratchet Climbers
     driverTriangle.toggleWhenPressed(new TurretFlip(180));
+    
+    // Uncomment these when you need 1 controller to both drive and shoot (delete the "//")
+
+    driverSquare.toggleWhenPressed(new RunIntake()); //Standard Intake Command, Runs Hopper/Indexer as well
+    driverCircle.toggleWhenPressed(new RunShooter(5000)); //Turns Shooter on
+    driverX.whileHeld(new FeedCells());
   }
 
   //TODO: Add Auto lol

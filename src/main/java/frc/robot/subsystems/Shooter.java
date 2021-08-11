@@ -22,6 +22,7 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.RobotMap;
 
 /**
@@ -32,8 +33,9 @@ public class Shooter extends SubsystemBase {
     public TalonFX shooterA = new TalonFX(RobotMap.shooterA);
     public TalonFX shooterB = new TalonFX(RobotMap.shooterB);
     public VictorSPX topWheel = new VictorSPX(RobotMap.topWheel);
-    public Solenoid hoodServo = new Solenoid(RobotMap.hoodServo);
-    
+    public Solenoid topHoodServo = new Solenoid(RobotMap.topHoodServo);
+    public Solenoid bottomHoodServo = new Solenoid(RobotMap.bottomHoodServo);
+
     public boolean isFar = false;
 
     public Shooter() {
@@ -66,7 +68,7 @@ public class Shooter extends SubsystemBase {
             shooterA.set(ControlMode.PercentOutput, 0);
         }
         else {
-            topWheel.set(ControlMode.PercentOutput, .9);
+            topWheel.set(ControlMode.PercentOutput, Constants.TOP_WHEEL_SPEED);
         }
         shooterA.set(ControlMode.Velocity, shooterRPMToNativeUnits(rpm));
     }
