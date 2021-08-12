@@ -5,30 +5,30 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
 import frc.robot.RobotContainer;
 
-public class SetHoodPositionCalculatedOutput extends CommandBase {
-  /** Creates a new SetHoodPositionCalculatedOutput. */
-  public SetHoodPositionCalculatedOutput() {
+public class ActuateHoodManual extends CommandBase {
+  /** Creates a new ActuateHoodManual. */
+  public boolean actuate;
+  public ActuateHoodManual(boolean actuate) {
     // Use addRequirements() here to declare subsystem dependencies.
+    this.actuate = actuate;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    RobotContainer.hood.actuateHoodManual(actuate);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    // RobotContainer.shooter.setHoodPosition(Robot.calculatedHoodPose);
-    RobotContainer.shooter.setHoodPosition(Robot.calculatedHoodPose);
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    RobotContainer.hood.actuateHoodManual(false);
   }
 
   // Returns true when the command should end.
@@ -36,5 +36,4 @@ public class SetHoodPositionCalculatedOutput extends CommandBase {
   public boolean isFinished() {
     return false;
   }
-
 }

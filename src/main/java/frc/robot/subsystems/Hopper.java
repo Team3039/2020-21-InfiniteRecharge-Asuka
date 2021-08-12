@@ -24,19 +24,16 @@ import frc.robot.RobotMap;
  */
 public class Hopper extends SubsystemBase {
 
-  public TalonSRX kickerWheel = new TalonSRX(RobotMap.kickerWheel);
+  public TalonSRX kickerWheel = new TalonSRX(RobotMap.kickerWheelAndAgitator);
   public TalonSRX backFeederBelt = new TalonSRX(RobotMap.backFeederBelt);
-  public TalonSRX frontFeederBeltWheel = new TalonSRX(RobotMap.frontFeederBeltWheel);
 
   public DigitalInput topBeam = new DigitalInput(RobotMap.topBeam);
   public DigitalInput lowBeam = new DigitalInput(RobotMap.lowBeam);
 
   public Hopper() {
     backFeederBelt.setInverted(false);
-    frontFeederBeltWheel.setInverted(false);
 
     backFeederBelt.setNeutralMode(NeutralMode.Brake);
-    frontFeederBeltWheel.setNeutralMode(NeutralMode.Brake);
     kickerWheel.setNeutralMode(NeutralMode.Brake);
   }
 
@@ -73,20 +70,14 @@ public class Hopper extends SubsystemBase {
     kickerWheel.set(ControlMode.PercentOutput, percentOutput);
   }
 
-  public void setFeederWheelFrontBeltSpeed(double percentOutput) {
-    frontFeederBeltWheel.set(ControlMode.PercentOutput, percentOutput);
-  }
-
   public void setHopperSpeed(double kickerSpeed, double backBeltSpeed, double frontBeltWheelSpeed) {
     kickerWheel.set(ControlMode.PercentOutput, kickerSpeed);
     backFeederBelt.set(ControlMode.PercentOutput, backBeltSpeed);
-    frontFeederBeltWheel.set(ControlMode.PercentOutput, frontBeltWheelSpeed);
   }
 
   public void stopSystems() {
     kickerWheel.set(ControlMode.PercentOutput, 0);
     backFeederBelt.set(ControlMode.PercentOutput, 0);
-    frontFeederBeltWheel.set(ControlMode.PercentOutput, 0);
   }
 
   @Override
@@ -100,18 +91,17 @@ public class Hopper extends SubsystemBase {
           break;
         case INTAKING:
           if (!getTopBeam() && !getLowBeam()) {
-            setHopperSpeed(.4, .6, .6);
+            setHopperSpeed(.55, .6, .6);
           }
           else if (getTopBeam() && !getLowBeam()) {
-            setKickerSpeed(.2);
+            setKickerSpeed(.55);
             setBackBeltSpeed(0);
-            setFeederWheelFrontBeltSpeed(.5);
           }
           else if (getTopBeam() && getLowBeam()){
             setHopperSpeed(0, 0, 0);
           }
           else if (!getTopBeam() && getLowBeam()) {
-            setHopperSpeed(.4, .6, .6);
+            setHopperSpeed(.55, .6, .6);
           }
           break;
         case FEEDING:

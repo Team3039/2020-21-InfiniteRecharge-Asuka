@@ -15,21 +15,21 @@ public class RobotMap {
   //intake/shooter
   public static int shooterA = 6;
   public static int shooterB = 7;
+  public static int topWheel = 8;
+
   public static int turret = 2;
   public static int intake = 0;
 
   //Indexer
-  public final static int kickerWheel = 11;
+  public final static int kickerWheelAndAgitator = 10;
   public final static int backFeederBelt = 9;
-  public final static int frontFeederBeltWheel = 10;
 
   //Color Wheel
   public final static int spinner = 9;
 
   //Climber
-  public final static int climberA = 3;
+  public final static int climberA = 1;
   public final static int climberB = 11;
-  public final static int climberC = 8;
 
 
 //SOLENOID
@@ -37,15 +37,13 @@ public class RobotMap {
   public final static int climbDeployer = 4;
   public final static int buddyDeploy = 2;
   public final static int climbRelease = 1;
+  public final static int hoodPiston = 0;
 //PWM
-  public final static int hoodServo = 0;
-  public final static int hoodServoB = 1;
 
 //DIO	
   public final static int turretSwitch = 0;
   public final static int topBeam = 1;
   public final static int lowBeam = 2;
-  public final static int hoodSensor = 3;
 
 //AIO
 }

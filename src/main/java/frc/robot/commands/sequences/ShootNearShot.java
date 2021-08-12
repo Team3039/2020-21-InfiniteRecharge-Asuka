@@ -9,7 +9,6 @@ package frc.robot.commands.sequences;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
-import frc.robot.commands.SetHood;
 import frc.robot.commands.SetIsFar;
 import frc.robot.commands.SetShooterSpeedRPM;
 import frc.robot.commands.SetTopWheel;
@@ -29,7 +28,6 @@ public class ShootNearShot extends SequentialCommandGroup {
       new SetIsFar(true),
       // TODO: Put SetHood() Command Here
       new SetTurretTrackMode(),
-      new SetHood(0.67),
       new SetTopWheel(.28),
       new SetShooterSpeedRPM(Constants.SHOOT_FAR_SHOT_RPM)
           );

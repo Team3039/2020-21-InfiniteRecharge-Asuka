@@ -1,88 +1,43 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2019 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
-import frc.robot.subsystems.Turret.TurretControlMode;
 
 public class Climber extends SubsystemBase {
-  
-  public TalonSRX climberA = new TalonSRX(RobotMap.climberA);
-  public TalonSRX climberB = new TalonSRX(RobotMap.climberB);
+  /** Creates a new Climber. */
 
-  public Solenoid climbRelease = new Solenoid(RobotMap.climbRelease);
+  public TalonSRX climberA = new TalonSRX(RobotMap.climberA);
+  public TalonSRX climberB  = new TalonSRX(RobotMap.climberB);
+
+  public Solenoid release = new Solenoid(RobotMap.climbRelease);
 
   public Climber() {
-    climberA.setInverted(true);
-    climberB.setInverted(true);
     climberB.follow(climberA);
-
     climberA.setNeutralMode(NeutralMode.Brake);
     climberB.setNeutralMode(NeutralMode.Brake);
+
+    setRelease(true);
+  }
+
+  public void setClimberSpeed(double percentOutput) {
+    climberA.set(ControlMode.PercentOutput, percentOutput * -1);
+  } 
+
+  public void setRelease(boolean isReleased) {
+    release.set(isReleased);
   }
   
-  public enum ClimberControlMode {
-    IDLE,
-    CLIMB
-  }
-
-  public final static Climber INSTANCE = new Climber();
-
-  public ClimberControlMode climberControlMode = ClimberControlMode.IDLE;
-
-  public static Climber getInstance() {
-    return INSTANCE;
-  }
-
-  public ClimberControlMode getControlMode() {
-    return climberControlMode;
-  }
-
-  public void setControlMode(ClimberControlMode controlMode) {
-    this.climberControlMode = controlMode;
-  }
-
-  public void actuateClimb() {
-    getInstance().getControlMode();
-    if (getControlMode().equals(ClimberControlMode.CLIMB))
-      climbRelease.set(false);
-    else {
-      climbRelease.set(true);
-    }
-  }
-
-  public void setClimberSpeed(double power){
-    climberA.set(ControlMode.PercentOutput, Math.abs(power));;
-  }
-
-  public void stop() {
-    climberA.set(ControlMode.PercentOutput, 0);
-  }
-
   @Override
   public void periodic() {
-    synchronized (Climber.this) {
-      switch(getControlMode()) {
-        case CLIMB:
-          actuateClimb();          
-          break;
-        default:
-          setClimberSpeed(0);
-          actuateClimb();
-          break;
-      }
-    }
+    // This method will be called once per scheduler run
   }
 }

@@ -2,11 +2,9 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.button.Button;
+import frc.robot.commands.ActuateHoodManual;
 import frc.robot.commands.ActuateIntake;
-import frc.robot.commands.DeployWinches;
 import frc.robot.commands.SetClimbArmSpeed;
-import frc.robot.commands.SetHood;
-import frc.robot.commands.SetHoodPositionCalculatedOutput;
 import frc.robot.commands.SetHopperIdleMode;
 import frc.robot.commands.SetHopperUnjamMode;
 import frc.robot.commands.SetIntakeSpeed;
@@ -15,8 +13,6 @@ import frc.robot.commands.SetTurretClimbMode;
 import frc.robot.commands.SetTurretDriverMode;
 import frc.robot.commands.SetTurretJoystickMode;
 import frc.robot.commands.SetTurretTrackMode;
-import frc.robot.commands.ShiftServo;
-import frc.robot.commands.sequences.ClimbDeploy;
 import frc.robot.commands.sequences.FeedCells;
 import frc.robot.commands.sequences.IndexCells;
 import frc.robot.commands.sequences.IntakeCells;
@@ -28,6 +24,7 @@ import frc.robot.commands.sequences.ShootNearShot;
 import frc.robot.controllers.PS4Gamepad;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.Hood;
 import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
@@ -41,6 +38,7 @@ public class RobotContainer {
   public final static Hopper hopper = new Hopper();
   public final static Shooter shooter = new Shooter();
   public final static Climber climber = new Climber();
+  public final static Hood hood = new Hood();
 
   public static PS4Gamepad driverPad = new PS4Gamepad(RobotMap.DRIVER_JOYSTICK_1_USB_ID);
   public static PS4Gamepad operatorPad = new PS4Gamepad(RobotMap.OPERATOR_JOYSTICK_1_USB_ID);
@@ -88,7 +86,6 @@ public class RobotContainer {
     driverSquare.whenPressed(new ShootMidShot());
     driverX.whenPressed(new ShootFarShot());
     driverR1.whileHeld(new FeedCells());
-    driverCircle.whenPressed(new SetHood(1));
     driverR1.whenReleased(new ResetHopper());
     driverR1.whenReleased(new ResetShooter());
     driverOptions.whileHeld(new SetTurretTrackMode());
@@ -96,11 +93,11 @@ public class RobotContainer {
     driverDPadDown.whenPressed(new ActuateIntake(false));
     driverL2.whileHeld(new SetIntakeSpeed(-.99));
     driverL2.whenReleased(new SetIntakeSpeed(0));
-    driverPadButton.whenPressed(new ClimbDeploy());
-    driverPadButton.whileHeld(new SetClimbArmSpeed(0.5));
-    driverShare.whileHeld(new SetClimbArmSpeed(-0.3));
+    // driverPadButton.whileHeld(new SetClimbArmSpeed(0.5));
+    // driverShare.whileHeld(new SetClimbArmSpeed(-0.3));
     driverOptions.whileHeld(new SetTurretJoystickMode());
     driverOptions.whenReleased(new SetTurretDriverMode());
+    driverPadButton.toggleWhenPressed(new ActuateHoodManual(true));
 
     operatorX.whenPressed(new ShootFarShot());
     operatorCircle.whenPressed(new ShootMidShot());

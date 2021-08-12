@@ -37,12 +37,7 @@ public class Shooter extends SubsystemBase {
 
     public TalonFX shooterA = new TalonFX(RobotMap.shooterA);
     public TalonFX shooterB = new TalonFX(RobotMap.shooterB);
-    public VictorSPX topWheel = new VictorSPX(RobotMap.climberC);
-
-    public Servo hoodServoA = new Servo(RobotMap.hoodServo);
-    public Servo hoodServoB = new Servo(RobotMap.hoodServoB);
-    
-    public AnalogInput hoodSensor = new AnalogInput(RobotMap.hoodSensor);
+    public VictorSPX topWheel = new VictorSPX(RobotMap.topWheel);
 
     public boolean isFar = false;
 
@@ -71,20 +66,6 @@ public class Shooter extends SubsystemBase {
         shooterB.clearStickyFaults();
 
         shooterB.follow(shooterA);
-    }
-
-    public void setHoodPosition(double theta) {
-        hoodServoA.set(theta);
-        hoodServoB.set(Math.abs(1-theta));
-    }
-
-    public void setHoodPositionDegrees(double theta) {
-        hoodServoA.set(degreesToTicks(theta));
-        hoodServoB.set(degreesToTicks(theta));
-    }
-
-    public double getServoPose() {
-        return hoodServoA.getAngle();
     }
 
     public void setShooterSpeed(double speed) {
@@ -166,14 +147,11 @@ public class Shooter extends SubsystemBase {
 
     @Override
     public void periodic() {
-
-        if (getShooterRPM() >= 5100) {
-            isFar = true;
-        }
-        else {
-            isFar = false;
-        }
-
-        System.out.println(hoodServoA.getPosition());
+        // if (getShooterRPM() >= 5100) {
+        //     isFar = true;
+        // }
+        // else {
+        //     isFar = false;
+        // }
     }
 }

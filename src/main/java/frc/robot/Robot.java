@@ -86,6 +86,8 @@ public class Robot extends TimedRobot {
     UsbCamera usbCamera = CameraServer.getInstance().startAutomaticCapture();
     usbCamera.setVideoMode(VideoMode.PixelFormat.kYUYV, 320, 180, 60);
     servoPose = 0.5;
+
+    SmartDashboard.putBoolean("isFar", RobotContainer.hood.isFar);
   }
 
   /**
@@ -97,7 +99,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    SmartDashboard.putNumber("SERVO POSE", RobotContainer.shooter.getServoPose());
     // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
     // commands, running already-scheduled commands, removing finished or interrupted commands,
     // and running subsystem periodic() methods. This must be called from the robot's periodic
@@ -110,23 +111,29 @@ public class Robot extends TimedRobot {
     targetArea = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
     CommandScheduler.getInstance().run();
 
-    if (targetArea <= Constants.LIMELIGHT_IS_FAR_AREA) {
-      Far = true;
-      RPM = 6500;
-    }
-    else {
-      Far = false;
-      RPM = 5000;
-    }
+    // if (targetArea <= Constants.LIMELIGHT_IS_FAR_AREA) {
+    //   Far = true;
+    //   RPM = 6500;
+    // }
+    // else {
+    //   Far = false;
+    //   RPM = 5000;
+    // }
 
-    if (targetArea == 0) {
-      calculatedHoodPose = 1;
+    // if (targetArea == 0) {
+    //   calculatedHoodPose = 1;
+    // }
+    // else {
+    //   calculatedHoodPose = RobotContainer.shooter.calculateDesiredHoodPosition(targetArea);
+    // }
+
+    if (targetArea >= Constants.HOOD_THRESHOLD) {
+      RobotContainer.hood.isFar = true;
     }
     else {
-      calculatedHoodPose = RobotContainer.shooter.calculateDesiredHoodPosition(targetArea);
+      RobotContainer.hood.isFar = false;
     }
     
-    SmartDashboard.putNumber("Calculated Output", calculatedHoodPose);
   }
 
   /**
