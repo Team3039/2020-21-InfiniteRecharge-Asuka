@@ -37,8 +37,7 @@ public class RobotMap {
   public final static int intakeTilt = 3;
   public final static int climbRelease = 1; 
   //the next two servos are connected to the top holes of the two hood servos and the bottom holes of the two hood servos, respectively
-  public final static int topHoodServo = 2;
-  public final static int bottomHoodServo = 0;
+  public final static int hoodPiston = 0;
 
 //PWM
 
@@ -46,7 +45,6 @@ public class RobotMap {
   public final static int turretSwitch = 0;
   public final static int topBeam = 1;
   public final static int lowBeam = 2;
-  public final static int hoodSensor = 3;
 
 //AIO
 }

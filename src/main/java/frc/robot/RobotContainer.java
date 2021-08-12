@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.Button;
+import frc.robot.commands.ActuateHood;
 import frc.robot.commands.Climb;
 import frc.robot.commands.FeedCells;
 import frc.robot.commands.ReleaseClimber;
@@ -16,6 +17,7 @@ import frc.robot.commands.TestLimelight;
 import frc.robot.controllers.PS4Gamepad;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Hood;
 import frc.robot.subsystems.Hopper;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
@@ -35,6 +37,7 @@ public class RobotContainer {
   public static Shooter shooter = new Shooter();
   public static Hopper hopper = new Hopper();
   public static Turret turret = new Turret();
+  public static Hood hood = new Hood();
 
   public static PS4Gamepad driverPad = new PS4Gamepad(0);
   public static PS4Gamepad operatorPad = new PS4Gamepad(1);
@@ -45,6 +48,7 @@ public class RobotContainer {
   Button driverR2 = driverPad.getR2();
   Button driverX = driverPad.getButtonX();
   Button driverSquare = driverPad.getButtonSquare();
+  Button driverL1 = driverPad.getL1();
 
   Button operatorCircle = operatorPad.getButtonCircle();
   Button operatorSquare = operatorPad.getButtonSquare();
@@ -65,6 +69,7 @@ public class RobotContainer {
     driverPadButton.whenPressed(new ReleaseClimber()); //Release Pneumatic on Climber
     driverR2.whileHeld(new Climb()); //Ratchet Climbers
     driverTriangle.toggleWhenPressed(new TurretFlip(180));
+    driverL1.toggleWhenPressed(new ActuateHood());
     
     // Uncomment these when you need 1 controller to both drive and shoot (delete the "//")
 
