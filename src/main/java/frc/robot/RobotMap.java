@@ -25,7 +25,7 @@ public class RobotMap {
   public final static int backFeederBelt = 9;
 
   //Color Wheel
-  public final static int spinner = 9;
+  // public final static int spinner = 9;
 
   //Climber
   public final static int climberA = 1;

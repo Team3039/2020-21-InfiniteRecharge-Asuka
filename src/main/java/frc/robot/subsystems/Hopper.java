@@ -105,12 +105,7 @@ public class Hopper extends SubsystemBase {
           }
           break;
         case FEEDING:
-            if (RobotContainer.shooter.isFar) {
             setHopperSpeed(.7, .4, .35);
-            }
-            else {
-              setHopperSpeed(.7, .4, .35);
-            }
           break;
         case UNJAMMING:
           setHopperSpeed(-.4, -.75, -.75);

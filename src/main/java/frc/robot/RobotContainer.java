@@ -95,7 +95,7 @@ public class RobotContainer {
     driverL2.whenReleased(new SetIntakeSpeed(0));
     // driverPadButton.whileHeld(new SetClimbArmSpeed(0.5));
     // driverShare.whileHeld(new SetClimbArmSpeed(-0.3));
-    driverOptions.whileHeld(new SetTurretJoystickMode());
+    driverOptions.whileHeld(new SetTurretTrackMode());
     driverOptions.whenReleased(new SetTurretDriverMode());
     driverPadButton.toggleWhenPressed(new ActuateHoodManual(true));
 
