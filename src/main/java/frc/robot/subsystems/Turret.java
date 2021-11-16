@@ -42,8 +42,9 @@ public class Turret extends SubsystemBase {
     setPipeline(0);
     setCamMode(false);
     turret.config_kP(0, 0.06);
-    turret.config_kD(0, 0.19);
+    turret.config_kD(0, 0.3);
     turret.selectProfileSlot(0, 0);
+    turret.config_kI(0,0.06);
   }
 
   public enum TurretControlMode {
@@ -87,6 +88,8 @@ public class Turret extends SubsystemBase {
 
   public void trackTarget() {
     double errorX = (0 - getTargetX()) * kP_TURRET;
+    double trenchError = (Constants.TURRET_TRENCH_X_OFFSET - getTargetX()) * kP_TURRET;
+    double initError = (-2.87 - getTargetX()) * kP_TURRET;
 
     if (getTurretSwitch() && getTurretPosition() > 245) {
       turret.set(ControlMode.PercentOutput, -.1);
@@ -95,7 +98,11 @@ public class Turret extends SubsystemBase {
       turret.set(ControlMode.PercentOutput, .1);
     }
     else {
-      turret.set(ControlMode.PercentOutput, errorX);
+        if (RobotContainer.hood.isFar)
+          turret.set(ControlMode.PercentOutput, trenchError);
+        else
+          turret.set(ControlMode.PercentOutput, initError);
+        // turret.set(ControlMode.PercentOutput, errorX);
     }
   }
   
@@ -173,10 +180,10 @@ public class Turret extends SubsystemBase {
   }
 
   public void manualControl() {
-    if (getTurretSwitch() && getTurretPosition() > 245) {
+    if (getTurretPosition() > 30) {
       turret.set(ControlMode.PercentOutput, -.1);
     }
-    else if (getTurretSwitch() && getTurretPosition() < -110) {
+    else if (getTurretPosition() < -175) {
       turret.set(ControlMode.PercentOutput, .1);
     }
     else {
@@ -211,11 +218,10 @@ public class Turret extends SubsystemBase {
       switch (getControlMode()) {
         case DRIVER:
           setDriverCamMode();
-          resetPose();
+          manualControl();
           break;
         case TRACKING:
-          setTrackingMode();
-          trackTarget();
+        manualControl();
           break;
         case JOYSTICK:
           manualControl();
@@ -225,7 +231,8 @@ public class Turret extends SubsystemBase {
           break;
         default:
         setDriverCamMode();
-        resetPose();
+        manualControl();
+        // resetPose();
         break;
       }
     }

@@ -4,31 +4,29 @@
 
 package frc.robot.commands;
 
-import java.util.Timer;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.RobotContainer;
+import frc.robot.Robot;
 
-public class ActuateHood extends CommandBase {
-  /** Creates a new ActuateHood. */
-  public ActuateHood() {
+public class ActuateClimb extends CommandBase {
+  /** Creates a new ActuateClimb. */
+  public ActuateClimb() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    Robot.isClimbing = false;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    RobotContainer.hood.actuateHood();
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    Robot.isClimbing = true;
   }
 
   // Returns true when the command should end.

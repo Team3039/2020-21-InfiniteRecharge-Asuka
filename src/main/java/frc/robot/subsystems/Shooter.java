@@ -28,6 +28,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpiutil.math.MathUtil;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 import frc.robot.RobotMap;
 
 /**
@@ -66,6 +67,14 @@ public class Shooter extends SubsystemBase {
         shooterB.clearStickyFaults();
 
         shooterB.follow(shooterA);
+        
+        topWheel.config_kP(0, kP_SHOOTER);
+        topWheel.config_kI(0, kI_SHOOTER);
+        topWheel.config_kD(0, kD_SHOOTER);
+        topWheel.config_kF(0, kF_SHOOTER);
+        topWheel.config_IntegralZone(0, kIZone_SHOOTER);
+
+        topWheel.setInverted(true);
     }
 
     public void setShooterSpeed(double speed) {
@@ -99,6 +108,15 @@ public class Shooter extends SubsystemBase {
 
     public void setTopWheel(double speed) {
         topWheel.set(ControlMode.PercentOutput, speed);
+    }
+
+    public void setTopWheelAuto() {
+        if (RobotContainer.hood.isFar) {
+            topWheel.set(ControlMode.PercentOutput, .85);
+        }
+        else {
+            topWheel.set(ControlMode.PercentOutput, Constants.TOP_WHEEL_INIT_OUTPUT);
+        }
     }
 
     public double calculateDesiredHoodPosition(double x) {

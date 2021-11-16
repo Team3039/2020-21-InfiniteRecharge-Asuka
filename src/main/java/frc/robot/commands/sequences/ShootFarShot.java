@@ -13,6 +13,7 @@ import frc.robot.Robot;
 import frc.robot.commands.SetIsFar;
 import frc.robot.commands.SetShooterSpeedRPM;
 import frc.robot.commands.SetTopWheel;
+import frc.robot.commands.SetTopWheelAuto;
 import frc.robot.commands.SetTurretTrackMode;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -29,7 +30,7 @@ public class ShootFarShot extends SequentialCommandGroup {
           new SetIsFar(true),
           // TODO: Put SetHood() Command Here
           new SetTurretTrackMode(),
-          new SetTopWheel(.28),
+          new SetTopWheelAuto(),
           new SetShooterSpeedRPM(Constants.SHOOT_FAR_SHOT_RPM)
           );
   }

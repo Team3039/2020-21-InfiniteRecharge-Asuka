@@ -25,7 +25,7 @@ public final class Constants {
     public static final double DRIVER_Y = 0.9;
     public static final double DRIVER_ROT = 0.7;
 
-    public static final double TURRET_ROT = 0.6;
+    public static final double TURRET_ROT = 0.4;
     public static final double HOOD_TICKS_PER_DEGREE = 1/45;
 
     public static final double HOOD_MINIMUM_VALUE = 100;
@@ -51,10 +51,10 @@ public final class Constants {
     public static final double kMinSpeedMetersPerSecond = Units.feetToMeters(4.5); //Find good value
     public static final double kMinAcclerationMetersPerSecondSquared = Math.pow(Units.feetToMeters(4.5), 2);
 
-    public static final double kMaxSpeedMetersPerSecond = Units.feetToMeters(10.5); //Find good value
+    public static final double kMaxSpeedMetersPerSecond = Units.feetToMeters(8.0); //Find good value
     public static final double kMaxAccelerationMetersPerSecondSquared = Math.pow(Units.feetToMeters(8), 2);
 
-    // Reasonable baseline values for a RAMSETE follower in units of meters and seconds
+    // Reasonable baseline values for a RAMSETE follower in units of meters and seco
     public static final double kRamseteB = 2.0;
     public static final double kRamseteZeta = 0.7;
 
@@ -62,14 +62,14 @@ public final class Constants {
     public static final double kP_TURRET = -0.03;
     public static final double TURRET_RATIO = 15155.2;
 
-    public static final double HOOD_THRESHOLD = 2;
+    public static final double HOOD_THRESHOLD = 1.472327;
 
     public static final double PPR = 3.7;
     public static final double TURRET_PPR_TO_DEGREES = 360 / TURRET_RATIO; //How many degrees is one tick
 
     //Shooter
-    public static final double kP_SHOOTER = 0.085;
-    public static final double kI_SHOOTER = 0.0;
+    public static final double kP_SHOOTER = 0.089;
+    public static final double kI_SHOOTER = 0.009;
     public static final double kD_SHOOTER = 0.0;
     public static final double kF_SHOOTER = 0.0512;
     public static final int kIZone_SHOOTER = 200;
@@ -80,14 +80,17 @@ public final class Constants {
 
     public static final double SHOOT_NEAR_SHOT_RPM = 4975;
     public static final double SHOOT_MID_SHOT_RPM = 5750;
-    public static final double SHOOT_FAR_SHOT_RPM = 5000;
+    public static final double SHOOT_FAR_SHOT_RPM = 4500;
     public static final double SHOOT_FAR_SHOT_RPM_FAR = 6500;
 
     public static final double LIMELIGHT_IS_FAR_AREA = 0.70;
 
     public static final double AUTO_SHOOT_NEAR_SHOT_RPM = 5000;
     public static final double AUTO_SHOOT_MID_SHOT_RPM =  5600;
-    public static final double AUTO_SHOOT_FAR_SHOT_RPM = 4900;
+    public static final double AUTO_SHOOT_FAR_SHOT_RPM = 6500;
+
+    public static final double TURRET_TRENCH_X_OFFSET = -3.18;
+    public static final double TOP_WHEEL_INIT_OUTPUT = 0.60;
 
     //Color Wheel
     public static final double COLOR_WHEEL_PPR = 0;

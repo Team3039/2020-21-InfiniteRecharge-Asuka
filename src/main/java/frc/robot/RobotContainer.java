@@ -2,10 +2,15 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.button.Button;
+import frc.robot.commands.ActuateClimb;
+import frc.robot.commands.ActuateHood;
 import frc.robot.commands.ActuateHoodManual;
 import frc.robot.commands.ActuateIntake;
 import frc.robot.commands.SetClimbArmSpeed;
+import frc.robot.commands.SetClimberASpeed;
+import frc.robot.commands.SetClimberBSpeed;
 import frc.robot.commands.SetHopperIdleMode;
+import frc.robot.commands.SetHopperIntakingMode;
 import frc.robot.commands.SetHopperUnjamMode;
 import frc.robot.commands.SetIntakeSpeed;
 import frc.robot.commands.SetShooterSpeed;
@@ -56,10 +61,13 @@ public class RobotContainer {
   Button driverL2 = driverPad.getL2();
   Button driverL3 = driverPad.getL3();
   Button driverR1 = driverPad.getR1();
+  Button driverR2 = driverPad.getR2();
   Button driverR3 = driverPad.getR3();
   Button startButton = driverPad.getStartButton();
   Button driverDPadUp = driverPad.getDPadUp();
   Button driverDPadDown = driverPad.getDPadDown();
+  Button driverDPadLeft = driverPad.getDPadLeft();
+  Button driverDPadRight = driverPad.getDPadRight();
 
   Button operatorTriangle = operatorPad.getButtonTriangle();
   Button operatorSquare = operatorPad.getButtonSquare();
@@ -72,6 +80,11 @@ public class RobotContainer {
   Button operatorL2 = operatorPad.getL2();
   Button operatorR1 = operatorPad.getR1();
   Button operatorR2 = operatorPad.getR2();
+  Button operatorDPadUp = operatorPad.getDPadUp();
+  Button operatorDPadDown = operatorPad.getDPadDown();
+  Button operatorDPadLeft = operatorPad.getDPadLeft();
+  Button operatorDPadRight = operatorPad.getDPadRight();
+
 
   public RobotContainer() {
     configureButtonBindings();
@@ -80,39 +93,49 @@ public class RobotContainer {
   // Put Button Bindings Here
   private void configureButtonBindings() {
 
-    driverL1.whileHeld(new IntakeCells());
-    driverL1.whenReleased(new ResetHopper());
-    driverTriangle.whenPressed(new ShootNearShot());
-    driverSquare.whenPressed(new ShootMidShot());
-    driverX.whenPressed(new ShootFarShot());
-    driverR1.whileHeld(new FeedCells());
-    driverR1.whenReleased(new ResetHopper());
-    driverR1.whenReleased(new ResetShooter());
-    driverOptions.whileHeld(new SetTurretTrackMode());
-    driverDPadUp.whenPressed(new ActuateIntake(true));
-    driverDPadDown.whenPressed(new ActuateIntake(false));
-    driverL2.whileHeld(new SetIntakeSpeed(-.99));
-    driverL2.whenReleased(new SetIntakeSpeed(0));
+    driverPadButton.whenPressed(new SetTurretJoystickMode());
+
+    // driverR1.whileHeld(new SetClimbArmSpeed(.9));
+
+    // driverL2.whileHeld(new SetClimberASpeed(.2));
+    // driverR2.whileHeld(new SetClimberBSpeed(.2));
+
+    driverR1.whileHeld(
+      () -> {
+        Drive.getInstance().setQuickTurn(true);;
+      }
+    );
+
+    driverR1.whenReleased(
+      () -> {
+        Drive.getInstance().setQuickTurn(false);
+      }
+    );
+
+    operatorL1.whileHeld(new SetIntakeSpeed(.99));
+    operatorL1.whileHeld(new SetHopperIntakingMode());
+    operatorL1.whenReleased(new ResetHopper());
+    operatorX.whenPressed(new ShootFarShot());
+    operatorR1.whileHeld(new FeedCells());
+    operatorR1.whenReleased(new ResetHopper());
+    operatorR1.whenReleased(new ResetShooter());
+    // operatorOptions.whileHeld(new SetTurretTrackMode());
+    operatorDPadUp.whenPressed(new ActuateIntake(true));
+    operatorDPadDown.whenPressed(new ActuateIntake(false));
+    operatorL2.whileHeld(new SetIntakeSpeed(-.99));
+    operatorL2.whileHeld(new SetHopperUnjamMode());
+    operatorL2.whenReleased(new SetIntakeSpeed(0));
+    operatorL2.whenReleased(new ResetHopper());
     // driverPadButton.whileHeld(new SetClimbArmSpeed(0.5));
     // driverShare.whileHeld(new SetClimbArmSpeed(-0.3));
-    driverOptions.whileHeld(new SetTurretTrackMode());
-    driverOptions.whenReleased(new SetTurretDriverMode());
-    driverPadButton.toggleWhenPressed(new ActuateHoodManual(true));
-
-    operatorX.whenPressed(new ShootFarShot());
-    operatorCircle.whenPressed(new ShootMidShot());
-    operatorTriangle.whenPressed(new ShootNearShot());
-    operatorR2.whileHeld(new FeedCells());
-    operatorR2.whenReleased(new ResetHopper());
-    operatorR2.whenReleased(new ResetShooter());
-    operatorL1.whileHeld(new SetIntakeSpeed(.6));
-    operatorL1.whileHeld(new SetShooterSpeed(-.8));
-    operatorL1.whileHeld(new SetHopperUnjamMode());
-    operatorL1.whenReleased(new SetIntakeSpeed(0));
-    operatorL1.whenReleased(new SetHopperIdleMode());
-    operatorL1.whenReleased(new SetShooterSpeed(0));
-    operatorL2.whenPressed(new ResetHopper());
-    operatorL2.whenPressed(new ResetShooter()); 
+    operatorOptions.whenPressed(new SetTurretTrackMode());
+    operatorShare.whenPressed(new SetTurretDriverMode());
+    operatorPadButton.whenPressed(new SetTurretClimbMode());
+    // driverTriangle.whenPressed(new ActuateHoodManual(true));
+    // driverTriangle.whenReleased(new ActuateHoodManual(false));
+    operatorTriangle.toggleWhenPressed(new ActuateClimb());
+    // operatorDPadLeft.whileHeld(new SetClimbArmSpeed(-.2));
+    // operatorDPadRight.whileHeld(new SetClimbArmSpeed(.2));
   }
 
   //Get Controller Objects

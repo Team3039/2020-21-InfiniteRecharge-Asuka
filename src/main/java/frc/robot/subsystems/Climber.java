@@ -21,16 +21,25 @@ public class Climber extends SubsystemBase {
   public Solenoid release = new Solenoid(RobotMap.climbRelease);
 
   public Climber() {
-    climberB.follow(climberA);
-    climberA.setNeutralMode(NeutralMode.Brake);
-    climberB.setNeutralMode(NeutralMode.Brake);
+    // climberB.follow(climberA);
+    climberA.setNeutralMode(NeutralMode.Coast);
+    climberB.setNeutralMode(NeutralMode.Coast);
 
     setRelease(true);
   }
 
   public void setClimberSpeed(double percentOutput) {
     climberA.set(ControlMode.PercentOutput, percentOutput * -1);
-  } 
+    climberB.set(ControlMode.PercentOutput, percentOutput * -1);
+  }
+
+  public void setClimberASpeed(double percentOutput) {
+    climberA.set(ControlMode.PercentOutput, percentOutput * -1);
+  }
+
+  public void setClimberBSpeed(double percentOutput) {
+    climberB.set(ControlMode.PercentOutput, percentOutput * -1);
+  }
 
   public void setRelease(boolean isReleased) {
     release.set(isReleased);

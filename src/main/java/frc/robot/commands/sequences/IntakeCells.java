@@ -25,7 +25,7 @@ public class IntakeCells extends SequentialCommandGroup {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
    super(
-          // new ActuateIntake(true),
+          new ActuateIntake(true),
           new SetHopperIntakingMode(),
           new SetIntakeSpeed(.99)
           );
