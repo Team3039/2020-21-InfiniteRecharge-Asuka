@@ -102,6 +102,8 @@ public class Drive extends SubsystemBase {
     mRightMaster.configFactoryDefault();
     mLeftSlave1.configFactoryDefault();
     mRightSlave1.configFactoryDefault();
+    
+    m_drive.setDeadband(0.05);
 
     m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getGyroFusedHeadingAngleDeg()));
   }
