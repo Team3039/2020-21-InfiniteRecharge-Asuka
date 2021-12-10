@@ -55,8 +55,8 @@ public class TrajectoryGenerator {
                     .setReversed(true);
 
     TrajectoryConfig reverseConfigFast =
-            new TrajectoryConfig(Units.feetToMeters(9),
-                    Units.feetToMeters(9))
+            new TrajectoryConfig(Constants.kMaxSpeedMetersPerSecond,
+                    Constants.kMaxAccelerationMetersPerSecondSquared)
                     // Add kinematics to ensure max speed is actually obeyed
                     .setKinematics(Constants.kDriveKinematics)
                     // Apply the voltage constraint
@@ -98,10 +98,10 @@ public class TrajectoryGenerator {
                 new Pose2d(Units.inchesToMeters(0), Units.inchesToMeters(0), new Rotation2d(0)),
                 List.of(
                         new Translation2d(Units.inchesToMeters(60), Units.inchesToMeters(40)),
-                        new Translation2d(Units.inchesToMeters(80), Units.inchesToMeters(63)),
-                        new Translation2d(Units.inchesToMeters(120), Units.inchesToMeters(66))
+                        new Translation2d(Units.inchesToMeters(80), Units.inchesToMeters(60)),
+                        new Translation2d(Units.inchesToMeters(120), Units.inchesToMeters(63))
                 ),
-                new Pose2d(Units.inchesToMeters(200), Units.inchesToMeters(68), new Rotation2d(0)),
+                new Pose2d(Units.inchesToMeters(200), Units.inchesToMeters(65.66), new Rotation2d(0)),
                 // Pass config
                 forwardConfigSlow
         );
@@ -343,7 +343,7 @@ public class TrajectoryGenerator {
                     List.of(
                             new Translation2d(Units.inchesToMeters(120), Units.inchesToMeters(64))
                     ),
-                    new Pose2d(Units.inchesToMeters(90), Units.inchesToMeters(62), new Rotation2d(0)),
+                    new Pose2d(Units.inchesToMeters(70), Units.inchesToMeters(50), new Rotation2d(0)),
                     // Pass config
                     reverseConfigFast
             );

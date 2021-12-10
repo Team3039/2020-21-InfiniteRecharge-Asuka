@@ -22,7 +22,7 @@ public class AutoShootMid extends SequentialCommandGroup {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
     super(new AutoShootMidShot(),
-          new WaitCommand(2),
+          new WaitCommand(.75),
           new AutoFeedCells()
           );
   }

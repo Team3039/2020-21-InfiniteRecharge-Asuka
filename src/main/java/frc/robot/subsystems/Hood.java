@@ -19,11 +19,12 @@ public class Hood extends SubsystemBase {
 
   public void actuateHood() {
     if (isFar) {
-      hoodPiston.set(true);
+      // -rjrefberf //
     }
     else {
-      hoodPiston.set(false);
+      // 09409rrifhierhi //
     }
+    hoodPiston.set(true);
   }
 
   public void actuateHoodManual(boolean actuate) {

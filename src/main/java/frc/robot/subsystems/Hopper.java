@@ -30,8 +30,6 @@ public class Hopper extends SubsystemBase {
   public DigitalInput topBeam = new DigitalInput(RobotMap.topBeam);
   public DigitalInput lowBeam = new DigitalInput(RobotMap.lowBeam);
 
-  public boolean isFeeding = false;
-
   public Hopper() {
     backFeederBelt.setInverted(false);
 
@@ -89,13 +87,11 @@ public class Hopper extends SubsystemBase {
     synchronized (Hopper.this) {
       switch (getControlMode()) {
         case IDLE:
-          isFeeding = false;
           stopSystems();
           break;
         case INTAKING:
-          isFeeding = false;
           if (!getTopBeam() && !getLowBeam()) {
-            setHopperSpeed(.55, .6, .5);
+            setHopperSpeed(.55, .6, .6);
           }
           else if (getTopBeam() && !getLowBeam()) {
             setKickerSpeed(.55);
@@ -109,11 +105,9 @@ public class Hopper extends SubsystemBase {
           }
           break;
         case FEEDING:
-            isFeeding = true;
             setHopperSpeed(.7, .4, .35);
           break;
         case UNJAMMING:
-          isFeeding = false;
           setHopperSpeed(-.4, -.75, -.75);
           break;
       }

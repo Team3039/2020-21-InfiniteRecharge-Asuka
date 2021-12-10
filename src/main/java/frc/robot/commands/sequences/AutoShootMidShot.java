@@ -11,8 +11,6 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
 import frc.robot.commands.SetIsFar;
 import frc.robot.commands.SetShooterSpeedRPM;
-import frc.robot.commands.SetTopWheel;
-import frc.robot.commands.SetTopWheelAuto;
 import frc.robot.commands.SetTurretTrackMode;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -27,9 +25,8 @@ public class AutoShootMidShot extends SequentialCommandGroup {
     // super(new FooCommand(), new BarCommand());
     super(
           new SetIsFar(true),
-          new SetTopWheelAuto(),
           new SetTurretTrackMode(),
-          new SetShooterSpeedRPM(Constants.AUTO_SHOOT_FAR_SHOT_RPM)
+          new SetShooterSpeedRPM(Constants.AUTO_SHOOT_MID_SHOT_RPM)
           );
   }
 }

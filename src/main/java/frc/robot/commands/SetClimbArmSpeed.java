@@ -8,7 +8,6 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
 import frc.robot.RobotContainer;
 
 public class SetClimbArmSpeed extends CommandBase {
@@ -25,21 +24,17 @@ public class SetClimbArmSpeed extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    // Robot.isClimbing = false;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // RobotContainer.climber.setRelease(true);
     RobotContainer.climber.setClimberSpeed(speed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    // Robot.isClimbing = true;
-    RobotContainer.climber.setClimberSpeed(0);
   }
 
   // Returns true when the command should end.

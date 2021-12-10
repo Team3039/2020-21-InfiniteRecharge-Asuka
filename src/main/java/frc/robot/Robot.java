@@ -27,7 +27,6 @@ import frc.robot.auto.routines.AutoSafe;
 import frc.robot.auto.routines.AutoSlalomPath;
 import frc.robot.auto.routines.AutoTrench8Ball;
 import frc.robot.auto.routines.AutoTrenchSteal;
-import frc.robot.commands.sequences.ResetShooter;
 // import frc.robot.auto.routines.TestA;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Turret.TurretControlMode;
@@ -56,8 +55,6 @@ public class Robot extends TimedRobot {
      public static double calculatedHoodPose;
      public static boolean Far;
      public static double RPM;
-
-     public static boolean isClimbing;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -91,13 +88,6 @@ public class Robot extends TimedRobot {
     servoPose = 0.5;
 
     SmartDashboard.putBoolean("isFar", RobotContainer.hood.isFar);
-
-    isClimbing = true;
-
-    // RobotContainer.climber.setRelease(true);
-    // RobotContainer.climber.setRelease(false);
-  
-    // RobotContainer.climber.setRelease(true);
   }
 
   /**
@@ -121,14 +111,14 @@ public class Robot extends TimedRobot {
     targetArea = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
     CommandScheduler.getInstance().run();
 
-    if (targetArea <= Constants.HOOD_THRESHOLD) {
-      Far = true;
-      RPM = 4500;
-    }
-    else {
-      Far = false;
-      RPM = 4500;
-    }
+    // if (targetArea <= Constants.LIMELIGHT_IS_FAR_AREA) {
+    //   Far = true;
+    //   RPM = 6500;
+    // }
+    // else {
+    //   Far = false;
+    //   RPM = 5000;
+    // }
 
     // if (targetArea == 0) {
     //   calculatedHoodPose = 1;
@@ -138,16 +128,12 @@ public class Robot extends TimedRobot {
     // }
 
     if (targetArea >= Constants.HOOD_THRESHOLD) {
-      RobotContainer.hood.isFar = false;
-    }
-    else {
       RobotContainer.hood.isFar = true;
     }
-    if (!RobotContainer.hopper.isFeeding) {
-      RobotContainer.hood.actuateHood();
+    else {
+      RobotContainer.hood.isFar = false;
     }
-
-      RobotContainer.climber.setRelease(!isClimbing);
+    
   }
 
   /**
@@ -157,15 +143,11 @@ public class Robot extends TimedRobot {
   public void disabledInit() {
     drive.resetOdometry(new Pose2d());
     // RobotContainer.turret.setControlMode(TurretControlMode.DRIVER);
-    RobotContainer.climber.setRelease(false);
   }
 
   @Override
   public void disabledPeriodic() {
     SmartDashboard.putString("Selected Auto: ", autonTaskChooser.getSelected().toString());
-    // RobotContainer.climber.setRelease(true);
-    // RobotContainer.intake.acuateIntake(true);
-    RobotContainer.climber.setRelease(true);
   }
 
   /**
@@ -176,10 +158,7 @@ public class Robot extends TimedRobot {
     drive.setControlMode(Drive.DriveControlMode.PATH_FOLLOWING);
     drive.resetOdometry(new Pose2d());
 
-    RobotContainer.turret.setControlMode(TurretControlMode.JOYSTICK);
-
-    // m_autonomousCommand = new AutoBouncePath();
-    m_autonomousCommand = autonTaskChooser.getSelected();
+    m_autonomousCommand = new AutoBouncePath();
 
 
     /*
@@ -213,7 +192,7 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
     drive.setControlMode(Drive.DriveControlMode.JOYSTICK);
-    RobotContainer.turret.setControlMode(TurretControlMode.DRIVER);                                                                        
+    RobotContainer.turret.setControlMode(TurretControlMode.DRIVER);
   }
 
   /**

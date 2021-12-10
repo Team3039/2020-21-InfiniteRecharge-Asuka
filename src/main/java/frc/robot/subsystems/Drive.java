@@ -18,7 +18,6 @@ import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.util.Units;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.RobotMap;
 
@@ -46,8 +45,6 @@ public class Drive extends SubsystemBase {
   private boolean isCalibrating = false;
   private double gyroYawOffsetAngleDeg = 0;
 
-  public static boolean isQuickTurn;
-
   // Differential Drive
   private DifferentialDrive m_drive;
 
@@ -59,7 +56,6 @@ public class Drive extends SubsystemBase {
   private final static Drive INSTANCE = new Drive();
 
   public Drive() {
-
     mLeftMaster = new WPI_TalonFX(RobotMap.leftFrontDrive);
     mLeftSlave1 = new TalonFX(RobotMap.leftRearDrive);
 
@@ -119,14 +115,6 @@ public class Drive extends SubsystemBase {
 
   public synchronized void setControlMode(DriveControlMode controlMode) {
     this.driveControlMode = controlMode;
-  }
-
-  public void setQuickTurn(boolean quickTurn) {
-    isQuickTurn = quickTurn;
-  }
-
-  public boolean isQuickTurn() {
-    return isQuickTurn;
   }
 
   // Encoder Setup
@@ -329,11 +317,7 @@ public class Drive extends SubsystemBase {
       DriveControlMode currentControlMode = getControlMode();
       switch (currentControlMode){
         case JOYSTICK:
-          m_drive.curvatureDrive(
-            RobotContainer.getDriver().getLeftYAxis() * -1, 
-            RobotContainer.getDriver().getRightXAxis(),  
-            isQuickTurn()
-            );
+          driveWithJoystick();
           break;
         case PATH_FOLLOWING:
           m_odometry.update(Rotation2d.fromDegrees(getGyroFusedHeadingAngleDeg()),

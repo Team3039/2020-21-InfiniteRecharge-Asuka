@@ -17,13 +17,10 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
 import frc.robot.auto.TrajectoryGenerator;
 import frc.robot.auto.commands.AutoFeedCells;
-import frc.robot.auto.commands.AutoShootMid;
 import frc.robot.auto.commands.AutoShootNear;
 import frc.robot.auto.commands.ResetOdometryAuto;
-import frc.robot.auto.commands.ResetShooterAuto;
 import frc.robot.auto.commands.StopTrajectory;
 import frc.robot.commands.sequences.AutoShootMidShot;
-import frc.robot.commands.sequences.FeedCells;
 import frc.robot.commands.sequences.IndexCells;
 import frc.robot.commands.sequences.IntakeCells;
 import frc.robot.commands.sequences.ResetHopper;
@@ -40,11 +37,11 @@ public class AutoTrench8Ball extends SequentialCommandGroup {
         addCommands(
                 new ResetOdometryAuto(),
                 new ParallelDeadlineGroup(
-                        new WaitCommand(3.5),
-                        new AutoShootMid()
-                ),
-                new ResetShooterAuto(),
+                new WaitCommand(2.8), 
+                new AutoShootNear()),
+                new ResetShooter(),
                 new ResetHopper(),
+                //Intake in Parallel
                 new ParallelDeadlineGroup(
                         new RamseteCommand(
                         mTrajectories.getCenterStartToEndOfTrench(),
@@ -62,6 +59,9 @@ public class AutoTrench8Ball extends SequentialCommandGroup {
                         mDrive), 
                         new IntakeCells()),
                 new StopTrajectory(),
+                new WaitCommand(.25),
+                new IndexCells(),
+                new AutoShootMidShot(),
                 new RamseteCommand(
                         mTrajectories.getEndOfTrenchToStartOfTrench(),
                         mDrive::getPose,
@@ -76,13 +76,13 @@ public class AutoTrench8Ball extends SequentialCommandGroup {
                         // RamseteCommand passes volts to the callback
                         mDrive::tankDriveVolts,
                         mDrive),
-                new StopTrajectory()
-                // new WaitCommand(1),
-                // new ParallelDeadlineGroup(
-                //         new WaitCommand(2.5), 
-                //         new AutoFeedCells()),
-                // new ResetShooter(),
-                // new ResetHopper()
+                new StopTrajectory(),
+                new WaitCommand(1),
+                new ParallelDeadlineGroup(
+                        new WaitCommand(2.5), 
+                        new AutoFeedCells()),
+                new ResetShooter(),
+                new ResetHopper()
         );
     }
 }
