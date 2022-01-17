@@ -2,14 +2,14 @@ package frc.robot.auto;
 
 import java.util.List;
 
-import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
-import edu.wpi.first.wpilibj.geometry.Pose2d;
-import edu.wpi.first.wpilibj.geometry.Rotation2d;
-import edu.wpi.first.wpilibj.geometry.Translation2d;
-import edu.wpi.first.wpilibj.trajectory.Trajectory;
-import edu.wpi.first.wpilibj.trajectory.TrajectoryConfig;
-import edu.wpi.first.wpilibj.trajectory.constraint.DifferentialDriveVoltageConstraint;
-import edu.wpi.first.wpilibj.util.Units;
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.trajectory.Trajectory;
+import edu.wpi.first.math.trajectory.TrajectoryConfig;
+import edu.wpi.first.math.trajectory.constraint.DifferentialDriveVoltageConstraint;
+import edu.wpi.first.math.util.Units;
 import frc.robot.Constants;
 
 public class TrajectoryGenerator {
@@ -64,7 +64,7 @@ public class TrajectoryGenerator {
                     .setReversed(true);
 
         public Trajectory getDriveStraight(){
-            return edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
+            return edu.wpi.first.math.trajectory.TrajectoryGenerator.generateTrajectory(
                     new Pose2d(Units.inchesToMeters(0), Units.inchesToMeters(0),
                             new Rotation2d(Units.radiansToDegrees(0))),
                     List.of(
@@ -78,7 +78,7 @@ public class TrajectoryGenerator {
         }
 
         public Trajectory getDriveStraightReversed(){
-            return edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
+            return edu.wpi.first.math.trajectory.TrajectoryGenerator.generateTrajectory(
                     new Pose2d(Units.inchesToMeters(120), Units.inchesToMeters(0),
                             new Rotation2d(Units.radiansToDegrees(0))),
                     List.of(
@@ -94,7 +94,7 @@ public class TrajectoryGenerator {
         //Start 8 Ball Trench Auto
         public Trajectory getCenterStartToEndOfTrench() {
         Trajectory centerStartToEndOfTrench;
-        centerStartToEndOfTrench = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
+        centerStartToEndOfTrench = edu.wpi.first.math.trajectory.TrajectoryGenerator.generateTrajectory(
                 new Pose2d(Units.inchesToMeters(0), Units.inchesToMeters(0), new Rotation2d(0)),
                 List.of(
                         new Translation2d(Units.inchesToMeters(60), Units.inchesToMeters(40)),
@@ -111,7 +111,7 @@ public class TrajectoryGenerator {
 
     public Trajectory getSlalomStartToTrenchStart() {
         Trajectory slalomStartToTrenchStart;
-        slalomStartToTrenchStart = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
+        slalomStartToTrenchStart = edu.wpi.first.math.trajectory.TrajectoryGenerator.generateTrajectory(
         new Pose2d(Units.inchesToMeters(0), Units.inchesToMeters(0), new Rotation2d(0)),
         List.of(
                 new Translation2d(Units.inchesToMeters(53), Units.inchesToMeters(39)),
@@ -135,7 +135,7 @@ public class TrajectoryGenerator {
 
 //     public Trajectory getTrenchStartToTrenchEndA() {
 //         Trajectory trenchStartToTrenchEndA;
-//         trenchStartToTrenchEndA = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
+//         trenchStartToTrenchEndA = edu.wpi.first.math.trajectory.TrajectoryGenerator.generateTrajectory(
 //                 new Pose2d(Units.inchesToMeters(199), Units.inchesToMeters(40), new Rotation2d(0)), 
 //                 List.of(
 //                         new Translation2d(Units.inchesToMeters(235), Units.inchesToMeters(-5))
@@ -148,7 +148,7 @@ public class TrajectoryGenerator {
 
 //     public Trajectory getTrenchStartToTrenchEndB() {
 //         Trajectory trenchStartToTrenchEndB;
-//         trenchStartToTrenchEndB = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
+//         trenchStartToTrenchEndB = edu.wpi.first.math.trajectory.TrajectoryGenerator.generateTrajectory(
 //                 new Pose2d(Units.inchesToMeters(250), Units.inchesToMeters(35), Rotation2d.fromDegrees(155)), 
 //                 List.of(
 //                 ), 
@@ -160,7 +160,7 @@ public class TrajectoryGenerator {
 
     public Trajectory getTrenchStartToSpin() {
         Trajectory trenchStartToSpin;
-        trenchStartToSpin = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
+        trenchStartToSpin = edu.wpi.first.math.trajectory.TrajectoryGenerator.generateTrajectory(
                 new Pose2d(Units.inchesToMeters(83), Units.inchesToMeters(77), Rotation2d.fromDegrees(0)), 
                 List.of(
                         new Translation2d(Units.inchesToMeters(217), Units.inchesToMeters(77)),
@@ -177,7 +177,7 @@ public class TrajectoryGenerator {
 
     public Trajectory getTrenchEndToTrenchStart() {
         Trajectory trenchEndToTrenchStart;
-        trenchEndToTrenchStart = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
+        trenchEndToTrenchStart = edu.wpi.first.math.trajectory.TrajectoryGenerator.generateTrajectory(
                 new Pose2d(Units.inchesToMeters(245), Units.inchesToMeters(53), Rotation2d.fromDegrees(180)), 
                 List.of(
                         new Translation2d(Units.inchesToMeters(183), Units.inchesToMeters(-20)),
@@ -192,7 +192,7 @@ public class TrajectoryGenerator {
 
     public Trajectory getBounceStartToFirstBall() {
         Trajectory bounceStartToFirstBall;
-        bounceStartToFirstBall = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
+        bounceStartToFirstBall = edu.wpi.first.math.trajectory.TrajectoryGenerator.generateTrajectory(
                 new Pose2d(Units.inchesToMeters(0), Units.inchesToMeters(0), Rotation2d.fromDegrees(0)), 
                 List.of(
                         new Translation2d(Units.inchesToMeters(62), Units.inchesToMeters(20))
@@ -206,7 +206,7 @@ public class TrajectoryGenerator {
     
     public Trajectory getSecondBallToThirdTrench() {
         Trajectory secondBallToThirdTrench;
-        secondBallToThirdTrench = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
+        secondBallToThirdTrench = edu.wpi.first.math.trajectory.TrajectoryGenerator.generateTrajectory(
                 new Pose2d(Units.inchesToMeters(160), Units.inchesToMeters(68), Rotation2d.fromDegrees(270)), 
                 List.of(
                         new Translation2d(Units.inchesToMeters(173), Units.inchesToMeters(0)),
@@ -221,7 +221,7 @@ public class TrajectoryGenerator {
 
     public Trajectory getThirdBallToFinalPose() {
         Trajectory thirdBallToFinalPose;
-        thirdBallToFinalPose = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
+        thirdBallToFinalPose = edu.wpi.first.math.trajectory.TrajectoryGenerator.generateTrajectory(
                 new Pose2d(Units.inchesToMeters(240), Units.inchesToMeters(70), Rotation2d.fromDegrees(90)), 
                 List.of(
                 ), 
@@ -233,7 +233,7 @@ public class TrajectoryGenerator {
 
     public Trajectory getFirstBallToSecondTrench() {
         Trajectory firstBallToSecondTrench;
-        firstBallToSecondTrench = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
+        firstBallToSecondTrench = edu.wpi.first.math.trajectory.TrajectoryGenerator.generateTrajectory(
                 new Pose2d(Units.inchesToMeters(77), Units.inchesToMeters(67), Rotation2d.fromDegrees(90)), 
                 List.of(
                         new Translation2d(Units.inchesToMeters(73), Units.inchesToMeters(0)),
@@ -249,7 +249,7 @@ public class TrajectoryGenerator {
 
     public Trajectory getBounceToFinalPoseA() {
         Trajectory bounceToFinalPoseA;
-        bounceToFinalPoseA = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
+        bounceToFinalPoseA = edu.wpi.first.math.trajectory.TrajectoryGenerator.generateTrajectory(
                 new Pose2d(Units.inchesToMeters(74), Units.inchesToMeters(0), Rotation2d.fromDegrees(150)), 
                 List.of(
                 ), 
@@ -261,7 +261,7 @@ public class TrajectoryGenerator {
 
     public Trajectory getBounceToFinalPoseB() {
         Trajectory bounceToFinalPoseB;
-        bounceToFinalPoseB = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
+        bounceToFinalPoseB = edu.wpi.first.math.trajectory.TrajectoryGenerator.generateTrajectory(
                 new Pose2d(Units.inchesToMeters(48), Units.inchesToMeters(30), Rotation2d.fromDegrees(180)), 
                 List.of(
                 ), 
@@ -273,7 +273,7 @@ public class TrajectoryGenerator {
 
     public Trajectory getSlalomToFinalPose() {
         Trajectory slalomToFinalPose;
-        slalomToFinalPose = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
+        slalomToFinalPose = edu.wpi.first.math.trajectory.TrajectoryGenerator.generateTrajectory(
                 new Pose2d(Units.inchesToMeters(200), Units.inchesToMeters(-25), Rotation2d.fromDegrees(180)), 
                 List.of(
                         new Translation2d(Units.inchesToMeters(160), Units.inchesToMeters(-25)),
@@ -289,7 +289,7 @@ public class TrajectoryGenerator {
 
     public Trajectory getHyperStartToSecondTurn() {
         Trajectory hyperStartToSecondTurn;
-        hyperStartToSecondTurn = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
+        hyperStartToSecondTurn = edu.wpi.first.math.trajectory.TrajectoryGenerator.generateTrajectory(
                 new Pose2d(Units.inchesToMeters(0), Units.inchesToMeters(0), Rotation2d.fromDegrees(0)), 
                 List.of(
                         new Translation2d(Units.inchesToMeters(70), Units.inchesToMeters(0)),
@@ -325,7 +325,7 @@ public class TrajectoryGenerator {
 
     public Trajectory getHyperSecondTurnToThirdTurn() {
         Trajectory hyperSecondTurnToThirdTurn;
-        hyperSecondTurnToThirdTurn = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
+        hyperSecondTurnToThirdTurn = edu.wpi.first.math.trajectory.TrajectoryGenerator.generateTrajectory(
                 new Pose2d(Units.inchesToMeters(200), Units.inchesToMeters(10), Rotation2d.fromDegrees(0)), 
                 List.of(
                         new Translation2d(Units.inchesToMeters(250), Units.inchesToMeters(15))
@@ -338,7 +338,7 @@ public class TrajectoryGenerator {
 
     public Trajectory getEndOfTrenchToStartOfTrench() {
             Trajectory endOfTrenchToStartOfTrench;
-            endOfTrenchToStartOfTrench = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
+            endOfTrenchToStartOfTrench = edu.wpi.first.math.trajectory.TrajectoryGenerator.generateTrajectory(
                     new Pose2d(Units.inchesToMeters(200), Units.inchesToMeters(65.66), new Rotation2d(0)),
                     List.of(
                             new Translation2d(Units.inchesToMeters(120), Units.inchesToMeters(64))
@@ -354,7 +354,7 @@ public class TrajectoryGenerator {
         //Start 5 Ball Steal Auto
         public Trajectory getStealStartToStealBall() {
             Trajectory stealStartToStealSpot;
-            stealStartToStealSpot = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
+            stealStartToStealSpot = edu.wpi.first.math.trajectory.TrajectoryGenerator.generateTrajectory(
                     new Pose2d(Units.inchesToMeters(0), Units.inchesToMeters(0), new Rotation2d(0)),
                     List.of(
                             new Translation2d(Units.inchesToMeters(60), Units.inchesToMeters(0))
@@ -368,7 +368,7 @@ public class TrajectoryGenerator {
 
         public Trajectory getStealStartToStealBallV2() {
             Trajectory stealStartToStealSpot;
-            stealStartToStealSpot = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
+            stealStartToStealSpot = edu.wpi.first.math.trajectory.TrajectoryGenerator.generateTrajectory(
                 new Pose2d(Units.inchesToMeters(0), Units.inchesToMeters(0), new Rotation2d(0)),
                 List.of(
                         new Translation2d(Units.inchesToMeters(75), Units.inchesToMeters(-19))
@@ -382,7 +382,7 @@ public class TrajectoryGenerator {
 
         public Trajectory getStealStartToStealBallV3() {
             Trajectory stealStartToStealSpot;
-            stealStartToStealSpot = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
+            stealStartToStealSpot = edu.wpi.first.math.trajectory.TrajectoryGenerator.generateTrajectory(
                     new Pose2d(Units.inchesToMeters(126), Units.inchesToMeters(-245), new Rotation2d(0)),
                     List.of(
                             new Translation2d(Units.inchesToMeters(201), Units.inchesToMeters(-264))
@@ -396,7 +396,7 @@ public class TrajectoryGenerator {
 
         public Trajectory getStealBallToCenterShot() {
             Trajectory stealSpotToCenterShot;
-            stealSpotToCenterShot = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
+            stealSpotToCenterShot = edu.wpi.first.math.trajectory.TrajectoryGenerator.generateTrajectory(
                     new Pose2d(Units.inchesToMeters(130), Units.inchesToMeters(0), new Rotation2d(0)),
                     List.of(
                             new Translation2d(Units.inchesToMeters(60), Units.inchesToMeters(60))
@@ -410,7 +410,7 @@ public class TrajectoryGenerator {
 
     public Trajectory getStealBallToCenterShotV2() {
         Trajectory stealSpotToCenterShot;
-        stealSpotToCenterShot = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
+        stealSpotToCenterShot = edu.wpi.first.math.trajectory.TrajectoryGenerator.generateTrajectory(
                 new Pose2d(Units.inchesToMeters(139), Units.inchesToMeters(-55), new Rotation2d(-45)),
                 List.of(
                         new Translation2d(Units.inchesToMeters(107), Units.inchesToMeters(5))
@@ -426,7 +426,7 @@ public class TrajectoryGenerator {
         //Start 10 Ball Rendezvous/Trench Auto
         public Trajectory getCenterStartToRendezvous2ball() {
             Trajectory centerStartToRendezvous2Ball;
-            centerStartToRendezvous2Ball = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
+            centerStartToRendezvous2Ball = edu.wpi.first.math.trajectory.TrajectoryGenerator.generateTrajectory(
                     new Pose2d(Units.inchesToMeters(0), Units.inchesToMeters(0), new Rotation2d(0)),
                     List.of(
                             new Translation2d(Units.inchesToMeters(80), Units.inchesToMeters(40))
@@ -440,7 +440,7 @@ public class TrajectoryGenerator {
 
         public Trajectory getRendezvous2BallToStartOfTrench() {
             Trajectory rendezvous2BallToStartOfTrench;
-            rendezvous2BallToStartOfTrench = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
+            rendezvous2BallToStartOfTrench = edu.wpi.first.math.trajectory.TrajectoryGenerator.generateTrajectory(
                     new Pose2d(Units.inchesToMeters(155), Units.inchesToMeters(-10), new Rotation2d(Units.degreesToRadians(-60))),
                     List.of(
                             new Translation2d(Units.inchesToMeters(100), Units.inchesToMeters(30))
@@ -454,7 +454,7 @@ public class TrajectoryGenerator {
 
         public Trajectory getStartOfTrenchToEndOfTrench() {
             Trajectory startOfTrenchToEndOfTrench;
-            startOfTrenchToEndOfTrench = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
+            startOfTrenchToEndOfTrench = edu.wpi.first.math.trajectory.TrajectoryGenerator.generateTrajectory(
                     new Pose2d(Units.inchesToMeters(70), Units.inchesToMeters(65), new Rotation2d(0)),
                     List.of(
                             new Translation2d(Units.inchesToMeters(100), Units.inchesToMeters(65.66))
@@ -469,7 +469,7 @@ public class TrajectoryGenerator {
         //Start 3 Ball Safe Auto
         public Trajectory getLeftStartToSafe(){
             Trajectory leftStartToSafe;
-            leftStartToSafe = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
+            leftStartToSafe = edu.wpi.first.math.trajectory.TrajectoryGenerator.generateTrajectory(
                     new Pose2d(Units.inchesToMeters(0), Units.inchesToMeters(0), new Rotation2d(Units.degreesToRadians(0))),
                     List.of(
                             new Translation2d(Units.inchesToMeters(-40), Units.inchesToMeters(0))
@@ -483,7 +483,7 @@ public class TrajectoryGenerator {
 
         public Trajectory getLeftStartToSafeTest() {
                 Trajectory leftStartToSafe;
-                leftStartToSafe = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
+                leftStartToSafe = edu.wpi.first.math.trajectory.TrajectoryGenerator.generateTrajectory(
                         new Pose2d(Units.inchesToMeters(0), Units.inchesToMeters(0), new Rotation2d(Units.degreesToRadians(0))),
                         List.of(
                                 new Translation2d(Units.inchesToMeters(-50), Units.inchesToMeters(0)),
@@ -501,7 +501,7 @@ public class TrajectoryGenerator {
 
         public Trajectory getSafeToLeftStartTest() {
                 Trajectory safeToLeftStart;
-                safeToLeftStart = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
+                safeToLeftStart = edu.wpi.first.math.trajectory.TrajectoryGenerator.generateTrajectory(
                         new Pose2d(Units.inchesToMeters(-300), Units.inchesToMeters(0), new Rotation2d(Units.degreesToRadians(0))),
                         List.of(
                                 new Translation2d(Units.inchesToMeters(-250), Units.inchesToMeters(0)),
@@ -519,7 +519,7 @@ public class TrajectoryGenerator {
 
     public Trajectory getLeftStartToSafeForward(){
         Trajectory leftStartToSafe;
-        leftStartToSafe = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
+        leftStartToSafe = edu.wpi.first.math.trajectory.TrajectoryGenerator.generateTrajectory(
                 new Pose2d(Units.inchesToMeters(0), Units.inchesToMeters(0), new Rotation2d(Units.degreesToRadians(0))),
                 List.of(
                         new Translation2d(Units.inchesToMeters(40), Units.inchesToMeters(0))
@@ -532,7 +532,7 @@ public class TrajectoryGenerator {
     }
     public Trajectory getStartToTrenchStart(){
         Trajectory startToTrenchStart;
-        startToTrenchStart = edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator.generateTrajectory(
+        startToTrenchStart = edu.wpi.first.math.trajectory.TrajectoryGenerator.generateTrajectory(
                 new Pose2d(Units.inchesToMeters(0), Units.inchesToMeters(0), new Rotation2d(Units.degreesToRadians(0))),
                 List.of(
                         new Translation2d(Units.inchesToMeters(40), Units.inchesToMeters(0))
