@@ -4,15 +4,16 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
 
 public class Hood extends SubsystemBase {
   /** Creates a new Hood. */
-  public Solenoid hoodPiston = new Solenoid(RobotMap.hoodPiston);
+  public Solenoid hoodPiston = new Solenoid(PneumaticsModuleType.CTREPCM, RobotMap.hoodPiston);
   
-  public static boolean isFar;
+  public boolean isFar;
 
   public Hood() {
   }

@@ -30,14 +30,14 @@ public class Drive extends SubsystemBase {
   private DriveControlMode driveControlMode = DriveControlMode.JOYSTICK;
 
   // Left Drive
-  private WPI_TalonFX mLeftMaster;
-  private TalonFX mLeftSlave1;
+  private WPI_TalonFX leftMaster;
+  private TalonFX leftSlave;
 
   // Right Drive
-  private WPI_TalonFX mRightMaster;
-  private TalonFX mRightSlave1;
+  private WPI_TalonFX rightMaster;
+  private TalonFX rightSlave;
 
-  private TalonSRX mPigeonTalon;
+  private TalonSRX pigeonTalon;
 
   // Gyro
   private PigeonIMU gyroPigeon;
@@ -46,62 +46,62 @@ public class Drive extends SubsystemBase {
   private double gyroYawOffsetAngleDeg = 0;
 
   // Differential Drive
-  private DifferentialDrive m_drive;
+  private DifferentialDrive drive;
 
   //Path Following
-  private final DifferentialDriveOdometry m_odometry;
+  private final DifferentialDriveOdometry odometry;
 
 
   // Subsystem Instance
   private final static Drive INSTANCE = new Drive();
 
   public Drive() {
-    mLeftMaster = new WPI_TalonFX(RobotMap.leftFrontDrive);
-    mLeftSlave1 = new TalonFX(RobotMap.leftRearDrive);
+    leftMaster = new WPI_TalonFX(RobotMap.leftFrontDrive);
+    leftSlave = new TalonFX(RobotMap.leftRearDrive);
 
-    mRightMaster = new WPI_TalonFX(RobotMap.rightFrontDrive);
-    mRightSlave1 = new TalonFX(RobotMap.rightRearDrive);
+    rightMaster = new WPI_TalonFX(RobotMap.rightFrontDrive);
+    rightSlave = new TalonFX(RobotMap.rightRearDrive);
 
-    mPigeonTalon = new TalonSRX(9);
+    pigeonTalon = new TalonSRX(9);
 
     TalonFXConfiguration configs = new TalonFXConfiguration();
     configs.primaryPID.selectedFeedbackSensor = FeedbackDevice.IntegratedSensor;
 
-    mLeftMaster.configAllSettings(configs);
-    mLeftSlave1.configAllSettings(configs);
+    leftMaster.configAllSettings(configs);
+    leftSlave.configAllSettings(configs);
 
-    mRightMaster.configAllSettings(configs);
-    mRightSlave1.configAllSettings(configs);
+    rightMaster.configAllSettings(configs);
+    rightSlave.configAllSettings(configs);
 
-    mLeftMaster.setInverted(TalonFXInvertType.Clockwise);
-    mLeftSlave1.setInverted(TalonFXInvertType.FollowMaster);
+    leftMaster.setInverted(TalonFXInvertType.Clockwise);
+    leftSlave.setInverted(TalonFXInvertType.FollowMaster);
 
-    mLeftMaster.setNeutralMode(NeutralMode.Brake);
-    mLeftSlave1.setNeutralMode(NeutralMode.Brake);
+    leftMaster.setNeutralMode(NeutralMode.Brake);
+    leftSlave.setNeutralMode(NeutralMode.Brake);
 
-    mLeftSlave1.follow(mLeftMaster);
+    leftSlave.follow(leftMaster);
 
-    mRightMaster.setInverted(TalonFXInvertType.CounterClockwise);
-    mRightSlave1.setInverted(TalonFXInvertType.FollowMaster);
+    rightMaster.setInverted(TalonFXInvertType.CounterClockwise);
+    rightSlave.setInverted(TalonFXInvertType.FollowMaster);
 
-    mRightMaster.setNeutralMode(NeutralMode.Brake);
-    mRightSlave1.setNeutralMode(NeutralMode.Brake);
+    rightMaster.setNeutralMode(NeutralMode.Brake);
+    rightSlave.setNeutralMode(NeutralMode.Brake);
 
-    mRightSlave1.follow(mRightMaster);
+    rightSlave.follow(rightMaster);
 
-    m_drive = new DifferentialDrive(mLeftMaster, mRightMaster);
-    m_drive.setSafetyEnabled(false);
+    drive = new DifferentialDrive(leftMaster, rightMaster);
+    drive.setSafetyEnabled(false);
 
-    gyroPigeon = new PigeonIMU(mPigeonTalon);
+    gyroPigeon = new PigeonIMU(pigeonTalon);
     gyroPigeon.configFactoryDefault();
-    mLeftMaster.configFactoryDefault();
-    mRightMaster.configFactoryDefault();
-    mLeftSlave1.configFactoryDefault();
-    mRightSlave1.configFactoryDefault();
+    leftMaster.configFactoryDefault();
+    rightMaster.configFactoryDefault();
+    leftSlave.configFactoryDefault();
+    rightSlave.configFactoryDefault();
     
-    m_drive.setDeadband(0.05);
+    drive.setDeadband(0.05);
 
-    m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getGyroFusedHeadingAngleDeg()));
+    odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getGyroFusedHeadingAngleDeg()));
   }
 
   public static Drive getInstance() {
@@ -121,22 +121,22 @@ public class Drive extends SubsystemBase {
 
   //Returns left sensors velocity in ticks per 100ms
   public double getLeftVelocityNativeUnits() {
-    return mLeftMaster.getSelectedSensorVelocity(0);
+    return leftMaster.getSelectedSensorVelocity(0);
   }
 
   //Returns right sensors velocity in ticks per 100ms
   public double getRightVelocityNativeUnits() {
-    return mLeftMaster.getSelectedSensorVelocity(0);
+    return leftMaster.getSelectedSensorVelocity(0);
   }
 
   //Returns left sensors position in ticks
   public double getLeftSensorPosition(){
-    return mLeftMaster.getSelectedSensorPosition(0);
+    return leftMaster.getSelectedSensorPosition(0);
   }
 
   //Returns right sensors position in ticks
   public double getRightSensorPosition(){
-    return mLeftMaster.getSelectedSensorPosition(0);
+    return leftMaster.getSelectedSensorPosition(0);
   }
 
   //Takes that times the wheel has rotated * by the circumference of the wheel to get its distance traveled in inches
@@ -214,8 +214,8 @@ public class Drive extends SubsystemBase {
   }
 
   public synchronized void resetEncoders() {
-    mLeftMaster.setSelectedSensorPosition(0);
-    mRightMaster.setSelectedSensorPosition(0);
+    leftMaster.setSelectedSensorPosition(0);
+    rightMaster.setSelectedSensorPosition(0);
   }
 
   // Gyro Set Up
@@ -266,8 +266,8 @@ public class Drive extends SubsystemBase {
     double rightOutput = y - rot;
 
     // Assigns Each Motor's Power
-    mLeftMaster.set(ControlMode.PercentOutput, leftOutput);
-    mRightMaster.set(ControlMode.PercentOutput, rightOutput);
+    leftMaster.set(ControlMode.PercentOutput, leftOutput);
+    rightMaster.set(ControlMode.PercentOutput, rightOutput);
   }
 
   //Path Following
@@ -277,7 +277,7 @@ public class Drive extends SubsystemBase {
    * @return The pose.
    */
   public Pose2d getPose() {
-    return m_odometry.getPoseMeters();
+    return odometry.getPoseMeters();
   }
 
   /**
@@ -297,7 +297,7 @@ public class Drive extends SubsystemBase {
   public void resetOdometry(Pose2d pose) {
     resetEncoders();
     resetGyroYawAngle(0);
-    m_odometry.resetPosition(pose, Rotation2d.fromDegrees(getGyroFusedHeadingAngleDeg()));
+    odometry.resetPosition(pose, Rotation2d.fromDegrees(getGyroFusedHeadingAngleDeg()));
   }
 
   /**
@@ -307,9 +307,9 @@ public class Drive extends SubsystemBase {
    * @param rightVolts the commanded right output
    */
   public void tankDriveVolts(double leftVolts, double rightVolts) {
-    mLeftMaster.setVoltage(leftVolts);
-    mRightMaster.setVoltage(rightVolts);
-    m_drive.feed();
+    leftMaster.setVoltage(leftVolts);
+    rightMaster.setVoltage(rightVolts);
+    drive.feed();
   }
 
   public void periodic() {
@@ -320,7 +320,7 @@ public class Drive extends SubsystemBase {
           driveWithJoystick();
           break;
         case PATH_FOLLOWING:
-          m_odometry.update(Rotation2d.fromDegrees(getGyroFusedHeadingAngleDeg()),
+          odometry.update(Rotation2d.fromDegrees(getGyroFusedHeadingAngleDeg()),
                   getLeftWheelDistanceMeters(),getRightWheelDistanceMeters());
           break;
         default:

@@ -8,6 +8,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
@@ -18,7 +19,7 @@ public class Climber extends SubsystemBase {
   public TalonSRX climberA = new TalonSRX(RobotMap.climberA);
   public TalonSRX climberB  = new TalonSRX(RobotMap.climberB);
 
-  public Solenoid release = new Solenoid(RobotMap.climbRelease);
+  public Solenoid release = new Solenoid(PneumaticsModuleType.CTREPCM, RobotMap.climbRelease);
 
   public Climber() {
     climberB.follow(climberA);
