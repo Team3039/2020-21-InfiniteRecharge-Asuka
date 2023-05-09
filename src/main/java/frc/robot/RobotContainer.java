@@ -6,6 +6,7 @@ import frc.robot.commands.ActuateHoodManual;
 import frc.robot.commands.ActuateIntake;
 import frc.robot.commands.SetHopperIdleMode;
 import frc.robot.commands.SetHopperUnjamMode;
+import frc.robot.commands.SetIntake;
 import frc.robot.commands.SetIntakeSpeed;
 import frc.robot.commands.SetShooterSpeed;
 import frc.robot.commands.SetTurretDriverMode;
@@ -18,7 +19,6 @@ import frc.robot.commands.sequences.ShootFarShot;
 import frc.robot.commands.sequences.ShootMidShot;
 import frc.robot.commands.sequences.ShootNearShot;
 import frc.robot.controllers.PS4Gamepad;
-import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Hood;
 import frc.robot.subsystems.Hopper;
@@ -33,7 +33,6 @@ public class RobotContainer {
   public final static Turret turret = new Turret();
   public final static Hopper hopper = new Hopper();
   public final static Shooter shooter = new Shooter();
-  public final static Climber climber = new Climber();
   public final static Hood hood = new Hood();
 
   public static PS4Gamepad driverPad = new PS4Gamepad(RobotMap.DRIVER_JOYSTICK_1_USB_ID);
@@ -52,6 +51,7 @@ public class RobotContainer {
   Button driverL2 = driverPad.getL2();
   Button driverL3 = driverPad.getL3();
   Button driverR1 = driverPad.getR1();
+  Button driverR2 = driverPad.getR2();
   Button driverR3 = driverPad.getR3();
   Button startButton = driverPad.getStartButton();
   Button driverDPadUp = driverPad.getDPadUp();
@@ -76,19 +76,19 @@ public class RobotContainer {
   // Put Button Bindings Here
   private void configureButtonBindings() {
 
-    driverL1.whileHeld(new IntakeCells());
+    driverL1.whileHeld(new SetIntake());
     driverL1.whenReleased(new ResetHopper());
     driverTriangle.whenPressed(new ShootNearShot());
     driverSquare.whenPressed(new ShootMidShot());
     driverX.whenPressed(new ShootFarShot());
-    driverR1.whileHeld(new FeedCells());
-    driverR1.whenReleased(new ResetHopper());
+    driverR2.whileHeld(new FeedCells());
+    driverR2.whenReleased(new ResetHopper());
     driverR1.whenReleased(new ResetShooter());
+    driverR1.whileHeld(new ShootFarShot());
     driverOptions.whileHeld(new SetTurretTrackMode());
-    driverDPadUp.whenPressed(new ActuateIntake(true));
-    driverDPadDown.whenPressed(new ActuateIntake(false));
-    driverL2.whileHeld(new SetIntakeSpeed(-.99));
-    driverL2.whenReleased(new SetIntakeSpeed(0));
+    driverDPadUp.toggleWhenPressed(new ActuateIntake());
+    driverL2.whileHeld(new SetHopperUnjamMode());
+    driverL2.whenReleased(new ResetHopper());
     // driverPadButton.whileHeld(new SetClimbArmSpeed(0.5));
     // driverShare.whileHeld(new SetClimbArmSpeed(-0.3));
     driverOptions.whileHeld(new SetTurretTrackMode());

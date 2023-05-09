@@ -18,6 +18,7 @@ import static frc.robot.Constants.kP_SHOOTER;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.StatusFrame;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
@@ -51,6 +52,10 @@ public class Shooter extends SubsystemBase {
         shooterA.setNeutralMode(NeutralMode.Coast);
         shooterB.setNeutralMode(NeutralMode.Coast);
         topWheel.setNeutralMode(NeutralMode.Coast);
+
+        shooterA.setStatusFramePeriod(StatusFrame.Status_1_General, 255);
+        shooterB.setStatusFramePeriod(StatusFrame.Status_1_General, 255);
+        topWheel.setStatusFramePeriod(StatusFrame.Status_1_General, 255);
 
         shooterA.config_kP(0, kP_SHOOTER);
         shooterA.config_kI(0, kI_SHOOTER);

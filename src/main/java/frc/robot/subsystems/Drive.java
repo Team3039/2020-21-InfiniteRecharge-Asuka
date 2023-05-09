@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.StatusFrame;
 import com.ctre.phoenix.motorcontrol.TalonFXInvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
@@ -10,12 +11,12 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.PigeonIMU;
 
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
@@ -86,6 +87,11 @@ public class Drive extends SubsystemBase {
 
     rightMaster.setNeutralMode(NeutralMode.Brake);
     rightSlave.setNeutralMode(NeutralMode.Brake);
+
+    leftMaster.setStatusFramePeriod(StatusFrame.Status_1_General, 100);
+    rightMaster.setStatusFramePeriod(StatusFrame.Status_1_General, 100);
+    leftSlave.setStatusFramePeriod(StatusFrame.Status_1_General, 100);
+    rightSlave.setStatusFramePeriod(StatusFrame.Status_1_General, 100);
 
     rightSlave.follow(rightMaster);
 

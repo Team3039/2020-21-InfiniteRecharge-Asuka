@@ -33,11 +33,11 @@ public class RobotMap {
 
 
 //SOLENOID
-  public final static int intakeTilt = 3;
-  public final static int climbDeployer = 4;
+  public final static int intakeTilt = 1;
+  public final static int climbDeployer = 0;
   public final static int buddyDeploy = 2;
-  public final static int climbRelease = 1;
-  public final static int hoodPiston = 0;
+  public final static int climbRelease = 3;
+  public final static int hoodPiston = 4;
 //PWM
 
 //DIO	

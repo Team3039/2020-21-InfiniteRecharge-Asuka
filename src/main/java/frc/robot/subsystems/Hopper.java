@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.StatusFrame;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -29,10 +30,13 @@ public class Hopper extends SubsystemBase {
   public DigitalInput lowBeam = new DigitalInput(RobotMap.lowBeam);
 
   public Hopper() {
-    backFeederBelt.setInverted(false);
+    backFeederBelt.setInverted(true);
 
     backFeederBelt.setNeutralMode(NeutralMode.Brake);
     kickerWheel.setNeutralMode(NeutralMode.Brake);
+
+    kickerWheel.setStatusFramePeriod(StatusFrame.Status_1_General, 255);
+    backFeederBelt.setStatusFramePeriod(StatusFrame.Status_1_General, 255);
   }
 
   public enum HopperControlMode {

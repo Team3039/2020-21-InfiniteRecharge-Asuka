@@ -11,6 +11,7 @@ import static frc.robot.Constants.TURRET_PPR_TO_DEGREES;
 import static frc.robot.Constants.kP_TURRET;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.StatusFrame;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -43,6 +44,7 @@ public class Turret extends SubsystemBase {
     turret.config_kP(0, 0.06);
     turret.config_kD(0, 0.19);
     turret.selectProfileSlot(0, 0);
+    turret.setStatusFramePeriod(StatusFrame.Status_1_General, 255);
   }
 
   public enum TurretControlMode {
@@ -211,6 +213,7 @@ public class Turret extends SubsystemBase {
         case DRIVER:
           setDriverCamMode();
           resetPose();
+          setTurretPosition(0);
           break;
         case TRACKING:
           setTrackingMode();
@@ -228,6 +231,5 @@ public class Turret extends SubsystemBase {
         break;
       }
     }
-    System.out.println(getCurrentPosition());
   }
 }

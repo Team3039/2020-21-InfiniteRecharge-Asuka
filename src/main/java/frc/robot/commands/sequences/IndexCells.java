@@ -23,7 +23,7 @@ public class IndexCells extends SequentialCommandGroup {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
     super(
-          new ActuateIntake(false),
+          new ActuateIntake(),
           new SetIntakeSpeed(0),
           new SetHopperIntakingMode()
           );

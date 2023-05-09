@@ -83,8 +83,8 @@ public class Robot extends TimedRobot {
 
     SmartDashboard.putData("Autonomous", autonTaskChooser);
 
-    UsbCamera usbCamera = CameraServer.startAutomaticCapture();
-    usbCamera.setVideoMode(VideoMode.PixelFormat.kYUYV, 320, 180, 60);
+    // UsbCamera usbCamera = CameraServer.startAutomaticCapture();
+    // usbCamera.setVideoMode(VideoMode.PixelFormat.kYUYV, 320, 180, 60);
     servoPose = 0.5;
 
     SmartDashboard.putBoolean("isFar", RobotContainer.hood.isFar);
@@ -147,7 +147,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledPeriodic() {
-    SmartDashboard.putString("Selected Auto: ", autonTaskChooser.getSelected().toString());
+    // SmartDashboard.putString("Selected Auto: ", autonTaskChooser.getSelected().toString());
   }
 
   /**

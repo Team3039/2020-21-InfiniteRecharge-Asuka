@@ -22,7 +22,7 @@ public class AutoFeedCells extends SequentialCommandGroup {
   public AutoFeedCells() {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
-    super(new ActuateIntake(false),
+    super(
           new SetIntakeSpeed(-.4),
           new SetHopperFeedingMode());  }
 }

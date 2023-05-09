@@ -9,7 +9,9 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.StatusFrame;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -27,6 +29,8 @@ public class Intake extends SubsystemBase {
 
   public Intake() {
     intake.setNeutralMode(NeutralMode.Coast);
+
+    intake.setStatusFramePeriod(StatusFrame.Status_1_General, 255);
   }
 
   public void acuateIntake(boolean lowerIntake){

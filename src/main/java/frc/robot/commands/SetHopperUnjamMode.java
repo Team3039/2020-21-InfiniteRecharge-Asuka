@@ -24,6 +24,7 @@ public class SetHopperUnjamMode extends CommandBase {
   @Override
   public void initialize() {
     RobotContainer.hopper.setControlMode(HopperControlMode.UNJAMMING);
+    RobotContainer.intake.setIntakeSpeed(-.8);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -34,6 +35,7 @@ public class SetHopperUnjamMode extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    RobotContainer.intake.setIntakeSpeed(0);
   }
 
   // Returns true when the command should end.
